@@ -2,3 +2,4 @@
 
 //MakeBanner.AppName();
 CheckFolders.StartCheckFolders();
+// init this
