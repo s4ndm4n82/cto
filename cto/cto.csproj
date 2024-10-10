@@ -9,5 +9,14 @@
   <ItemGroup>
     <PackageReference Include="CsvHelper" Version="33.0.1" />
   </ItemGroup>
+  <ItemGroup>
+    <None Update="ConfigFiles\appsettings.Release.json">
+      <DependentUpon>appsettings.json</DependentUpon>
+    </None>
+    <None Remove="ConfigFiles\appsettings.Debug,.json" />
+    <None Update="ConfigFiles\appsettings.Debug.json">
+      <DependentUpon>appsettings.json</DependentUpon>
+    </None>
+  </ItemGroup>
 
 </Project>
