@@ -1,14 +1,18 @@
-using Microsoft.VisualBasic;
+using System.Reflection;
 
-namespace cto.Classes;
+namespace cto.ProgramClasses;
 
 public class MakeBanner
 {
 	public static void AppName()
 	{
-		var appName = "Csv To One";
+		var assembly = Assembly.GetExecutingAssembly().GetName();
+		var appVersion = assembly.Version;
+
+		var settings = ReadSettings.ReadAppSettings();
+		var appName = settings.AppConfigs.AppSettings.AppName;
 		var padding = (Console.WindowWidth - appName.Length) / 2;
-		var title = new string(' ', padding) + appName + new string(' ', padding);
+		var title = new string(' ', padding) + appName + " v" + appVersion;
 
 		HorizontalLine();
 		Console.WriteLine(title);
