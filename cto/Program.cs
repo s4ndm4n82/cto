@@ -1,5 +1,8 @@
 ﻿using cto.ProgramClasses;
+using cto.SupportClasses;
 
+var exHandler = new ExceptionHandler();
+exHandler.GlobalExceptionHandler();
 
 VersionIncrementer.IncrementVersion();
 //MakeBanner.AppName();

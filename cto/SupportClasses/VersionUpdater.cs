@@ -15,8 +15,8 @@ public class VersionIncrementer
 
 		try
 		{
-			FolderPaths.Instance.InitializePaths();
-			var appRootDirectory = FolderPaths.Instance.WorkingDirectory.Split("\\bin")[0];
+			// Gets the working directory.
+			var appRootDirectory = Directory.GetCurrentDirectory().Split("\\bin")[0];
 			var assemblyInfoFilePath = Path.Combine(appRootDirectory, "SupportClasses", "AssemblyInfo.cs");
 
 			var lines = File.ReadAllLines(assemblyInfoFilePath);

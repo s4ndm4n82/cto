@@ -7,9 +7,11 @@ public sealed class FolderPaths
 {
 	static class FolderNames
 	{
-		public const string InputFolder1 = "InputFolder1";
-		public const string InputFolder2 = "InputFolder2";
+		// Default folder names
+		public const string InvoiceFolder = "InvoiceFolder";
+		public const string LineItemsFolder = "LineItemsFolder";
 		public const string OutputFolder = "OutputFolder";
+		public const string HoldFolder = "HoldFolder";
 	}
 
 	private static readonly FolderPaths _instances = new();
@@ -21,41 +23,56 @@ public sealed class FolderPaths
 		get { return _instances; }
 	}
 
-	public string InputFolderName1 { get; private set; } = string.Empty;
-	public string InputFolderName2 { get; private set; } = string.Empty;
+	// Folder name elements
+	public string InvoiceCsvFolderName { get; private set; } = string.Empty;
+	public string LineItemsCsvFolderName { get; private set; } = string.Empty;
 	public string OutputFolderName { get; private set; } = string.Empty;
+	public string HoldFolderName { get; private set; } = string.Empty;
+
+	// Folder path elements
 	public string WorkingDirectory { get; private set; } = string.Empty;
 	public string HoldFolderPath { get; private set; } = string.Empty;
+	public string OutputFolderPath { get; private set; } = string.Empty;
 
 
 	public void InitializePaths()
 	{
 		var settings = ReadSettings.ReadAppSettings();
 
-		InputFolderName1 = !string.IsNullOrEmpty(
-			settings.AppConfigs.FolderNameSettings.InputFolderName1
+		// Folder names
+		InvoiceCsvFolderName = !string.IsNullOrEmpty(
+			settings.AppConfigs.FolderNameSettings.InvoiceCsvFolderName
 			)
-			? settings.AppConfigs.FolderNameSettings.InputFolderName1
-			: FolderNames.InputFolder1;
+		? settings.AppConfigs.FolderNameSettings.InvoiceCsvFolderName
+		: FolderNames.InvoiceFolder;
 
-		InputFolderName2 = !string.IsNullOrEmpty(
-			settings.AppConfigs.FolderNameSettings.InputFolderName2
-			)
-			? settings.AppConfigs.FolderNameSettings.InputFolderName2
-			: FolderNames.InputFolder2;
+		LineItemsCsvFolderName = !string.IsNullOrEmpty(
+			settings.AppConfigs.FolderNameSettings.LineItemsCsvFolderName
+		)
+		? settings.AppConfigs.FolderNameSettings.LineItemsCsvFolderName
+		: FolderNames.LineItemsFolder;
 
 		OutputFolderName = !string.IsNullOrEmpty(
 			settings.AppConfigs.FolderNameSettings.OutputFolderName
-			)
-			? settings.AppConfigs.FolderNameSettings.OutputFolderName
-			: FolderNames.OutputFolder;
+		)
+		? settings.AppConfigs.FolderNameSettings.OutputFolderName
+		: FolderNames.OutputFolder;
 
+		HoldFolderName = !string.IsNullOrEmpty(
+			settings.AppConfigs.FolderNameSettings.HoldFolderName
+		)
+		? settings.AppConfigs.FolderNameSettings.HoldFolderName
+		: FolderNames.HoldFolder;
+
+		// Directory paths
 		WorkingDirectory = !string.IsNullOrEmpty(
 			settings.AppConfigs.FolderPathSetting.BaseFolderPath
-			)
-			? settings.AppConfigs.FolderPathSetting.BaseFolderPath
-			: Directory.GetCurrentDirectory();
+		)
+		? settings.AppConfigs.FolderPathSetting.BaseFolderPath
+		: Directory.GetCurrentDirectory();
 
-		HoldFolderPath = Path.Combine(WorkingDirectory, "HoldFolder");
+		HoldFolderPath = Path.Combine(WorkingDirectory, HoldFolderName);
+
+		OutputFolderPath = Path.Combine(WorkingDirectory, OutputFolderName);
 	}
 }

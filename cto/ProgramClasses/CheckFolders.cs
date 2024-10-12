@@ -9,8 +9,8 @@ public class CheckFolders
 		var loopCount = 0;
 		FolderPaths.Instance.InitializePaths();
 
-		var inputFolderName1 = FolderPaths.Instance.InputFolderName1;
-		var inputFolderName2 = FolderPaths.Instance.InputFolderName2;
+		var inputFolderName1 = FolderPaths.Instance.InvoiceCsvFolderName;
+		var inputFolderName2 = FolderPaths.Instance.LineItemsCsvFolderName;
 		var outputFolderName = FolderPaths.Instance.OutputFolderName;
 		var holdFolderPath = FolderPaths.Instance.HoldFolderPath;
 
