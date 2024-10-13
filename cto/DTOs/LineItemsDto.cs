@@ -2,16 +2,37 @@ using System;
 
 namespace cto.DTOs;
 
+using CsvHelper.Configuration.Attributes;
+
 public class LineItemsDto
 {
-	public string EInvoiceNumber { get; set; } = string.Empty;         // Mapped "eInvoiceNumber"
-	public int ID { get; set; }
-	public string DescriptionProductService { get; set; } = string.Empty;   // Mapped "DescriptionProductService"
-	public decimal UnitPrice { get; set; }
-	public decimal Subtotal { get; set; }
-	public decimal TotalTaxAmount { get; set; }
-	public decimal TotalExcludingTax { get; set; }
-	public decimal DiscountRate { get; set; }
-	public decimal DiscountAmount { get; set; }
+	[Name("eInvoiceNumber")]
+	public string EInvoiceNumber { get; set; } = string.Empty;  // Mapped to "eInvoiceNumber"
+
+	/*[Name("ID")]
+	public int ID { get; set; }*/
+
+	[Name("DescriptionProductService")]
+	public string DescriptionProductService { get; set; } = string.Empty;  // Mapped to "DescriptionProductService"
+
+	[Name("UnitPrice")]
+	public string UnitPrice { get; set; } = string.Empty;
+
+	[Name("Subtotal")]
+	public string Subtotal { get; set; } = string.Empty;
+
+	[Name("TotalTaxAmount")]
+	public string TotalTaxAmount { get; set; } = string.Empty;
+
+	[Name("TotalExcludingTax")]
+	public string TotalExcludingTax { get; set; } = string.Empty;
+
+	[Name("DiscountRate")]
+	public string DiscountRate { get; set; } = string.Empty;
+
+	[Name("DiscountAmount")]
+	public string DiscountAmount { get; set; } = string.Empty;
+
+	[Name("DiscountDescription")]
 	public string DiscountDescription { get; set; } = string.Empty;
 }

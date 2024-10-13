@@ -73,6 +73,6 @@ public sealed class FolderPaths
 
 		HoldFolderPath = Path.Combine(WorkingDirectory, HoldFolderName);
 
-		OutputFolderPath = Path.Combine(WorkingDirectory, OutputFolderName);
+		OutputFolderPath = Path.Combine(HoldFolderPath, OutputFolderName);
 	}
 }

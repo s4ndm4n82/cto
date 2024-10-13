@@ -5,7 +5,7 @@ namespace cto.DTOs;
 public class InvoiceDto
 {
 	[Name("Line ID")]
-	public long LineID { get; set; }
+	public string LineID { get; set; } = string.Empty;
 
 	[Name("eInvoiceNumber")]
 	public string EInvoiceNumber { get; set; } = string.Empty;
@@ -20,7 +20,7 @@ public class InvoiceDto
 	public string CurrencyCode { get; set; } = string.Empty;
 
 	[Name("CurrencyExchangeRate")]
-	public decimal CurrencyExchangeRate { get; set; }
+	public string CurrencyExchangeRate { get; set; } = string.Empty;
 
 	[Name("Supplier.Name")]
 	public string SupplierName { get; set; } = string.Empty;
@@ -32,7 +32,7 @@ public class InvoiceDto
 	public string SupplierIDType { get; set; } = string.Empty;
 
 	[Name("Supplier.IDNo")]
-	public long SupplierIDNo { get; set; }
+	public string SupplierIDNo { get; set; } = string.Empty;
 
 	[Name("Supplier.Address.AddressLine0")]
 	public string SupplierAddressAddressLine0 { get; set; } = string.Empty;
@@ -59,16 +59,16 @@ public class InvoiceDto
 	public string SupplierContactNumber { get; set; } = string.Empty;
 
 	[Name("TotalExcludingTax")]
-	public decimal TotalExcludingTax { get; set; }
+	public string TotalExcludingTax { get; set; } = string.Empty;
 
 	[Name("TotalIncludingTax")]
-	public decimal TotalIncludingTax { get; set; }
+	public string TotalIncludingTax { get; set; } = string.Empty;
 
 	[Name("TotalPayableAmount")]
-	public decimal TotalPayableAmount { get; set; }
+	public string TotalPayableAmount { get; set; } = string.Empty;
 
 	[Name("TotalTaxAmount")]
-	public decimal TotalTaxAmount { get; set; }
+	public string TotalTaxAmount { get; set; } = string.Empty;
 
 	[Name("UIN")]
 	public string UIN { get; set; } = string.Empty;

@@ -6,17 +6,17 @@ namespace cto.SupportClasses;
 
 public class ReadCsvFileData
 {
-	public static List<InvoiceDto> ReadInvoiceCsvFileData(string fileName)
+	public static Dictionary<string, InvoiceDto> ReadInvoiceCsvFileData(string fileName)
 	{
 		using var reader = new StreamReader(fileName);
 		using var csv = new CsvReader(reader, CultureInfo.InvariantCulture);
-		return csv.GetRecords<InvoiceDto>().ToList();
+		return csv.GetRecords<InvoiceDto>().ToDictionary(x => x.EInvoiceNumber);
 	}
 
-	public static Dictionary<string, LineItemsDto> ReadLineItemsCsvFileData(string fileName)
+	public static List<LineItemsDto> ReadLineItemsCsvFileData(string fileName)
 	{
 		using var reader = new StreamReader(fileName);
 		using var csv = new CsvReader(reader, CultureInfo.InvariantCulture);
-		return csv.GetRecords<LineItemsDto>().ToDictionary(x => x.EInvoiceNumber);
+		return csv.GetRecords<LineItemsDto>().ToList();
 	}
 }
