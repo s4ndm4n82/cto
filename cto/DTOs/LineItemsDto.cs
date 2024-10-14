@@ -1,5 +1,3 @@
-using System;
-
 namespace cto.DTOs;
 
 using CsvHelper.Configuration.Attributes;
