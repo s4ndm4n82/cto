@@ -5,20 +5,36 @@ namespace cto.ProgramClasses;
 
 public class ReadSettings
 {
+	private static readonly string configFilePath = Path
+	.Combine(
+		Directory.GetCurrentDirectory(), "ConfigFiles"
+		);
+
 	public static AppSettingsClass ReadAppSettings()
 	{
-		var configFilePath = Path.Combine(Directory.GetCurrentDirectory(), "ConfigFiles");
+		try
+		{
+			var configBuilder = ReadConfigs("appsettings.json").Get<AppSettingsClass>();
 
+			return configBuilder ??
+			throw new InvalidOperationException("AppSettings not found in configuration");
+		}
+		catch (Exception ex)
+		{
+			Console.WriteLine(ex.Message);
+			throw;
+		}
+	}
+	private static IConfigurationRoot ReadConfigs(string configFileName)
+	{
 		try
 		{
 			var configBuilder = new ConfigurationBuilder()
-				.SetBasePath(configFilePath)
-				.AddJsonFile("appsettings.json")
-				.Build();
+			.SetBasePath(configFilePath)
+			.AddJsonFile(configFileName)
+			.Build();
 
-			var config = configBuilder.Get<AppSettingsClass>();
-
-			return config ?? throw new InvalidOperationException("AppSettings not found in configuration");
+			return configBuilder;
 		}
 		catch (Exception ex)
 		{

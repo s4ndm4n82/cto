@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
   
   <PropertyGroup>
     <OutputType>Exe</OutputType>
@@ -25,6 +25,7 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="EPPlus" Version="7.4.2" />
   </ItemGroup>
   <ItemGroup>
     <None Update="ConfigFiles\appsettings.Release.json">
@@ -38,17 +39,6 @@
     <None Update="ConfigFiles\appsettings.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <TransformOnBuild>true</TransformOnBuild>
-    </None>
-    <None Update="ConfigFiles\CustomerConfigs.Debug.json">
-      <IsTransformFile>true</IsTransformFile>
-      <DependentUpon>CustomerConfigs.json</DependentUpon>
-    </None>
-    <None Update="ConfigFiles\CustomerConfigs.json">
-      <TransformOnBuild>true</TransformOnBuild>
-    </None>
-    <None Update="ConfigFiles\CustomerConfigs.Release.json">
-      <IsTransformFile>true</IsTransformFile>
-      <DependentUpon>CustomerConfigs.json</DependentUpon>
     </None>
   </ItemGroup>
   

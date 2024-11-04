@@ -8,9 +8,9 @@ public sealed class FolderPaths
 	static class FolderNames
 	{
 		// Default folder names
-		public const string InvoiceFolder = "InvoiceFolder";
-		public const string LineItemsFolder = "LineItemsFolder";
-		public const string OutputFolder = "OutputFolder";
+		public const string InvoiceFolder = "Invoice";
+		public const string LineItemsFolder = "LineItems";
+		public const string OutputFolder = "Output";
 		public const string HoldFolder = "HoldFolder";
 	}
 
@@ -41,34 +41,34 @@ public sealed class FolderPaths
 
 		// Folder names
 		InvoiceCsvFolderName = !string.IsNullOrEmpty(
-			settings.AppConfigs.FolderNameSettings.InvoiceCsvFolderName
+			settings.AppConfigs.FolderDeliverSettings.InputFolderNames.InvoiceCsvFolderName
 			)
-		? settings.AppConfigs.FolderNameSettings.InvoiceCsvFolderName
+		? settings.AppConfigs.FolderDeliverSettings.InputFolderNames.InvoiceCsvFolderName
 		: FolderNames.InvoiceFolder;
 
 		LineItemsCsvFolderName = !string.IsNullOrEmpty(
-			settings.AppConfigs.FolderNameSettings.LineItemsCsvFolderName
+			settings.AppConfigs.FolderDeliverSettings.InputFolderNames.LineItemsCsvFolderName
 		)
-		? settings.AppConfigs.FolderNameSettings.LineItemsCsvFolderName
+		? settings.AppConfigs.FolderDeliverSettings.InputFolderNames.LineItemsCsvFolderName
 		: FolderNames.LineItemsFolder;
 
 		OutputFolderName = !string.IsNullOrEmpty(
-			settings.AppConfigs.FolderNameSettings.OutputFolderName
+			settings.AppConfigs.FolderDeliverSettings.OutputFolderName.OutputCsvFolderName
 		)
-		? settings.AppConfigs.FolderNameSettings.OutputFolderName
+		? settings.AppConfigs.FolderDeliverSettings.OutputFolderName.OutputCsvFolderName
 		: FolderNames.OutputFolder;
 
 		HoldFolderName = !string.IsNullOrEmpty(
-			settings.AppConfigs.FolderNameSettings.HoldFolderName
+			settings.AppConfigs.FolderDeliverSettings.FileHoldFolder
 		)
-		? settings.AppConfigs.FolderNameSettings.HoldFolderName
+		? settings.AppConfigs.FolderDeliverSettings.FileHoldFolder
 		: FolderNames.HoldFolder;
 
 		// Directory paths
 		WorkingDirectory = !string.IsNullOrEmpty(
-			settings.AppConfigs.FolderPathSetting.BaseFolderPath
+			settings.AppConfigs.FolderDeliverSettings.BaseFolderPath
 		)
-		? settings.AppConfigs.FolderPathSetting.BaseFolderPath
+		? settings.AppConfigs.FolderDeliverSettings.BaseFolderPath
 		: Directory.GetCurrentDirectory();
 
 		HoldFolderPath = Path.Combine(WorkingDirectory, HoldFolderName);
