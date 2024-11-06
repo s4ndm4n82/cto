@@ -26,38 +26,7 @@ public class ReadInExcelFile
 			var lineValues = excelFileData.Workbook.Worksheets[lineItemsWsName];
 			var matchingColumnIndex = GetColumnIndex(matchingColumn, fieldValues);
 
-			// Looping through the invoice level worksheet
-			for (var row = 1; row <= fieldValues.Dimension.End.Row; row++)
-			{
-				var invoiceLevelRow = fieldValues.Cells[row, 1, row, fieldValues.Dimension.End.Column];
-
-				var matchingInvoiceNumber = invoiceLevelRow[row, matchingColumnIndex].Value.ToString();
-
-				/*foreach (var line in lineValues.Cells)
-				{
-					if (line != null && line.Value != null)
-					{
-						if (line.Value.ToString() == matchingInvoiceNumber)
-						{
-							var matchingRow = line.Start.Row;
-							var rowValues = lineValues.Cells[matchingRow, 1, matchingRow, lineValues.Dimension.End.Column];
-							Console.WriteLine(string.Join(", ", rowValues.Select(c => c.Value?.ToString())));
-							break;
-						}
-					}
-				}*/
-
-				var matchingRows = lineValues.Cells
-				.Where(cell => cell != null && cell.Value != null && cell.Value.ToString() == matchingInvoiceNumber)
-				.Select(cell => cell.Start.Row)
-				.FirstOrDefault();
-
-				if (matchingRows != 0)
-				{
-					var rowValues = lineValues.Cells[matchingRows, 1, matchingRows, lineValues.Dimension.End.Column];
-					Console.WriteLine(string.Join(", ", rowValues.Select(c => c.Value?.ToString())));
-				}
-			}
+			CreateDto(fieldValues, lineValues, matchingColumnIndex);
 		}
 		catch (Exception ex)
 		{
@@ -86,6 +55,49 @@ public class ReadInExcelFile
 		{
 			Console.WriteLine(ex.Message);
 			throw;
+		}
+	}
+
+	private static void CreateDto(ExcelWorksheet invoice,
+	 ExcelWorksheet line,
+	 int matchingColumnIndex)
+	{
+		// Looping through the invoice level worksheet
+		for (var row = 2; row <= invoice.Dimension.End.Row; row++)
+		{
+			var invoiceLevelRow = invoice
+			.Cells[
+				row, 1, row, invoice.Dimension.End.Column
+				];
+
+			var cell = invoiceLevelRow[row, matchingColumnIndex];
+
+			if (cell == null
+			|| cell.Value == null
+			|| string.IsNullOrEmpty(cell.Value.ToString()))
+			{
+				break;
+			}
+
+			var matchingInvoiceNumber = cell.Value.ToString();
+
+			var matchingRows = line.Cells
+			.Where(
+				cell => cell != null
+				&& cell.Value != null
+				&& cell.Value.ToString() == matchingInvoiceNumber
+				)
+			.Select(cell => cell.Start.Row)
+			.ToList();
+
+			var invoiceDataDto = AddDataToDto.AddDataToInvoiceDto(invoiceLevelRow, row);
+
+			var lineItemsDto = matchingRows
+			.Select(rowValue => AddDataToDto.AddDataToLineItemsDto
+			(line.Cells[rowValue, 1, rowValue, line.Dimension.End.Column], rowValue))
+			.ToList();
+
+			invoiceDataDto.LineItems.AddRange(lineItemsDto);
 		}
 	}
 }
