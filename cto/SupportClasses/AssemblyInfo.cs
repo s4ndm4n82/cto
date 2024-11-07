@@ -9,6 +9,6 @@ using System.Reflection;
 [assembly: AssemblyTitle("CTO")]
 
 // Version information for an assembly consists of the following four values:
-[assembly: AssemblyVersion("1.0.0.169")]
-[assembly: AssemblyFileVersion("1.0.0.169")]
-[assembly: AssemblyInformationalVersion("1.0.0.169")]
+[assembly: AssemblyVersion("1.0.0.170")]
+[assembly: AssemblyFileVersion("1.0.0.170")]
+[assembly: AssemblyInformationalVersion("1.0.0.170")]

@@ -1,4 +1,4 @@
-using cto.DTOs;
+using cto.Classes;
 using Microsoft.Extensions.Configuration;
 
 namespace cto.ProgramClasses;

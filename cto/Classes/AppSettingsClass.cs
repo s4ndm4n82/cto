@@ -1,4 +1,4 @@
-namespace cto.DTOs;
+namespace cto.Classes;
 
 public class AppSettingsClass
 {
@@ -76,6 +76,7 @@ public class FileSettings
 	public string MainFieldWorksheet { get; set; } = string.Empty;
 	public string LineItemsFieldWorksheet { get; set; } = string.Empty;
 	public string CustomsDeclarationWorksheet { get; set; } = string.Empty;
+	public string DummyBase64 { get; set; } = string.Empty;
 }
 
 public class FieldSettings

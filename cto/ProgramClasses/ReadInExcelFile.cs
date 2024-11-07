@@ -62,42 +62,51 @@ public class ReadInExcelFile
 	 ExcelWorksheet line,
 	 int matchingColumnIndex)
 	{
-		// Looping through the invoice level worksheet
-		for (var row = 2; row <= invoice.Dimension.End.Row; row++)
+		try
 		{
-			var invoiceLevelRow = invoice
-			.Cells[
-				row, 1, row, invoice.Dimension.End.Column
-				];
-
-			var cell = invoiceLevelRow[row, matchingColumnIndex];
-
-			if (cell == null
-			|| cell.Value == null
-			|| string.IsNullOrEmpty(cell.Value.ToString()))
+			// Looping through the invoice level worksheet
+			for (var row = 2; row <= invoice.Dimension.End.Row; row++)
 			{
-				break;
+				var invoiceLevelRow = invoice
+				.Cells[
+					row, 1, row, invoice.Dimension.End.Column
+					];
+
+				var cell = invoiceLevelRow[row, matchingColumnIndex];
+
+				if (cell == null
+				|| cell.Value == null
+				|| string.IsNullOrEmpty(cell.Value.ToString()))
+				{
+					break;
+				}
+
+				var matchingInvoiceNumber = cell.Value.ToString();
+
+				var matchingRows = line.Cells
+				.Where(
+					cell => cell != null
+					&& cell.Value != null
+					&& cell.Value.ToString() == matchingInvoiceNumber
+					)
+				.Select(cell => cell.Start.Row)
+				.ToList();
+
+				var invoiceDataDto = AddDataToDto.AddDataToInvoiceDto(invoiceLevelRow, row);
+
+				var lineItemsDto = matchingRows
+				.Select(rowValue => AddDataToDto.AddDataToLineItemsDto
+				(line.Cells[rowValue, 1, rowValue, line.Dimension.End.Column], rowValue))
+				.ToList();
+
+				invoiceDataDto.LineItems.AddRange(lineItemsDto);
+				CreateApiJsonRequest.MakeJsonRequest(invoiceDataDto);
 			}
-
-			var matchingInvoiceNumber = cell.Value.ToString();
-
-			var matchingRows = line.Cells
-			.Where(
-				cell => cell != null
-				&& cell.Value != null
-				&& cell.Value.ToString() == matchingInvoiceNumber
-				)
-			.Select(cell => cell.Start.Row)
-			.ToList();
-
-			var invoiceDataDto = AddDataToDto.AddDataToInvoiceDto(invoiceLevelRow, row);
-
-			var lineItemsDto = matchingRows
-			.Select(rowValue => AddDataToDto.AddDataToLineItemsDto
-			(line.Cells[rowValue, 1, rowValue, line.Dimension.End.Column], rowValue))
-			.ToList();
-
-			invoiceDataDto.LineItems.AddRange(lineItemsDto);
+		}
+		catch (Exception ex)
+		{
+			Console.WriteLine(ex.Message);
+			throw;
 		}
 	}
 }
