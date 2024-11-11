@@ -26,6 +26,7 @@
     </PackageReference>
     <PackageReference Include="EPPlus" Version="7.4.2" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="RestSharp" Version="112.1.0" />
   </ItemGroup>
   <ItemGroup>
     <None Update="ConfigFiles\appsettings.Release.json">

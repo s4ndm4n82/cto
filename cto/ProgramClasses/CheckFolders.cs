@@ -9,8 +9,7 @@ public class CheckFolders
 		var loopCount = 0;
 		FolderPaths.Instance.InitializePaths();
 
-		var inputFolderName1 = FolderPaths.Instance.InvoiceCsvFolderName;
-		var inputFolderName2 = FolderPaths.Instance.LineItemsCsvFolderName;
+		var inputFolderName = FolderPaths.Instance.InputFolderName;
 		var outputFolderName = FolderPaths.Instance.OutputFolderName;
 		var holdFolderPath = FolderPaths.Instance.HoldFolderPath;
 
@@ -21,8 +20,7 @@ public class CheckFolders
 
 		var constDirectoryList = new[]
 		{
-			inputFolderName1,
-			inputFolderName2,
+			inputFolderName,
 			outputFolderName
 		};
 

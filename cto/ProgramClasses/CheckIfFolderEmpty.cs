@@ -10,8 +10,8 @@ public class CheckIfFolderEmpty
 		var loopCount = 0;
 
 		FolderPaths.Instance.InitializePaths();
-		var inputFolderName1 = FolderPaths.Instance.InvoiceCsvFolderName;
-		var inputFolderName2 = FolderPaths.Instance.LineItemsCsvFolderName;
+		var inputFolderName1 = FolderPaths.Instance.InputFolderName;
+		var inputFolderName2 = FolderPaths.Instance.BackUpFolderName;
 		var holdFolderPath = FolderPaths.Instance.HoldFolderPath;
 
 		var folderList = new[]

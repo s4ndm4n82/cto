@@ -41,19 +41,9 @@ public class FolderDeliverSettings
 {
 	public string BaseFolderPath { get; set; } = string.Empty;
 	public string FileHoldFolder { get; set; } = string.Empty;
-	public InputFolderNames InputFolderNames { get; set; } = new();
-	public OutputFolderName OutputFolderName { get; set; } = new();
-}
-
-public class InputFolderNames
-{
-	public string InvoiceCsvFolderName { get; set; } = string.Empty;
-	public string LineItemsCsvFolderName { get; set; } = string.Empty;
-}
-
-public class OutputFolderName
-{
-	public string OutputCsvFolderName { get; set; } = string.Empty;
+	public string InputFolderName { get; set; } = string.Empty;
+	public string OutputFolderName { get; set; } = string.Empty;
+	public string BackUpFolderName { get; set; } = string.Empty;
 }
 
 public class FtpDeliverSettings

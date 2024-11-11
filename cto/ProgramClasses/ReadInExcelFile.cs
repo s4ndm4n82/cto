@@ -16,7 +16,7 @@ public class ReadInExcelFile
 			var matchingColumn = settings.AppConfigs.FileSettings.MatchColumn;
 			var invoiceWsName = settings.AppConfigs.FileSettings.MainFieldWorksheet;
 			var lineItemsWsName = settings.AppConfigs.FileSettings.LineItemsFieldWorksheet;
-			var inputFolderName = FolderPaths.Instance.InvoiceCsvFolderName;
+			var inputFolderName = FolderPaths.Instance.InputFolderName;
 			var inputFilePath = Path.Combine(FolderPaths.Instance.HoldFolderPath,
 			inputFolderName, inputFileName);
 
