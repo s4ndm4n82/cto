@@ -71,8 +71,15 @@ public class FileSettings
 
 public class FieldSettings
 {
-	public string[] MainFieldsList { get; set; } = [];
-	public string[] LineItemsFieldsList { get; set; } = [];
+	public List<string> MainFieldsList { get; set; } = [];
+	public List<string> LineItemsFieldsList { get; set; } = [];
+	public List<LineDefaultValues> LineDefaultValues { get; set; } = [];
+}
+
+public class LineDefaultValues
+{
+	public string FieldName { get; set; } = string.Empty;
+	public string FieldValue { get; set; } = string.Empty;
 }
 
 public class UploadSettings

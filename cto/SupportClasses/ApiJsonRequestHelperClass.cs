@@ -1,4 +1,3 @@
-using System;
 using System.Reflection;
 using cto.Classes;
 using cto.DTOs;
@@ -88,8 +87,10 @@ public class ApiJsonRequestHelperClass
 	{
 		var settings = ReadSettings.ReadAppSettings();
 		var lineFields = settings.AppConfigs.FieldSettings.LineItemsFieldsList;
+		var lineDefaultValue = settings.AppConfigs.FieldSettings.LineDefaultValues;
 		var tables = new List<JsonStringClass.Tables>();
 		var table = new JsonStringClass.Tables();
+		var value = string.Empty;
 
 		try
 		{
@@ -113,15 +114,22 @@ public class ApiJsonRequestHelperClass
 							break;
 						}
 
-						var value = property.GetValue(lineItem)?.ToString();
-
-						if (string.IsNullOrEmpty(value))
-						{
-							break;
-						}
-
-						row.Fields.Add(new JsonStringClass.LineFields { Name = lineField, Value = value });
+						value = property.GetValue(lineItem)?.ToString();
 					}
+					else
+					{
+						value = lineDefaultValue
+						.Where(x => x.FieldName.Equals(lineField, StringComparison.OrdinalIgnoreCase))
+						.Select(y => y.FieldValue)
+						.FirstOrDefault();
+					}
+
+					if (string.IsNullOrEmpty(value))
+					{
+						break;
+					}
+
+					row.Fields.Add(new JsonStringClass.LineFields { Name = lineField, Value = value });
 				}
 				table.Rows.Add(row);
 			}
