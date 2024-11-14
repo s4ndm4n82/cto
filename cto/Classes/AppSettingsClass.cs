@@ -73,6 +73,8 @@ public class FieldSettings
 {
 	public List<string> MainFieldsList { get; set; } = [];
 	public List<string> LineItemsFieldsList { get; set; } = [];
+	public List<string> MainFieldHeaders { get; set; } = [];
+	public List<string> LineItemHeaders { get; set; } = [];
 	public List<LineDefaultValues> LineDefaultValues { get; set; } = [];
 }
 

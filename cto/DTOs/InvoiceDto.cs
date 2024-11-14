@@ -8,6 +8,8 @@ public class InvoiceDto
 	public string Classification { get; set; } = string.Empty;
 	public string CurrencyCode { get; set; } = string.Empty;
 	public string CurrencyExchangeRate { get; set; } = string.Empty;
+	public string KFormType { get; set; } = "K1";
+	public string KFormNumber { get; set; } = "12345";
 	public string SupplierName { get; set; } = string.Empty;
 	public string SupplierTIN { get; set; } = string.Empty;
 	public string SupplierIDType { get; set; } = string.Empty;
@@ -24,5 +26,7 @@ public class InvoiceDto
 	public string TotalIncludingTax { get; set; } = string.Empty;
 	public string TotalPayableAmount { get; set; } = string.Empty;
 	public string TotalTaxAmount { get; set; } = string.Empty;
+	public string OriginalInvoiceNumber { get; set; } = string.Empty;
+	public string InvoiceReferenceUin { get; set; } = string.Empty;
 	public List<LineItemsDto> LineItems { get; set; } = [];
 }
