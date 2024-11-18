@@ -7,20 +7,8 @@ public class InvoiceDto
 	public string Classification { get; set; } = string.Empty;
 	public string CurrencyCode { get; set; } = string.Empty;
 	public string CurrencyExchangeRate { get; set; } = string.Empty;
-	public string CustomsDeclaration { get; set; } = string.Empty;
-	public string CustomsDeclarationNoFormNumber { get; set; } = string.Empty;
-	public string BuyerName { get; set; } = string.Empty;
-	public string BuyerTIN { get; set; } = string.Empty;
-	public string BuyerIDType { get; set; } = string.Empty;
-	public string BuyerIDNo { get; set; } = string.Empty;
-	public string BuyerAddressAddressLine0 { get; set; } = string.Empty;
-	public string BuyerAddressCityName { get; set; } = string.Empty;
-	public string BuyerAddressState { get; set; } = string.Empty;
-	public string BuyerAddressCountryCode { get; set; } = string.Empty;
-	public string BuyerSSTNo { get; set; } = string.Empty;
-	public string BuyerMSICCode { get; set; } = string.Empty;
-	public string BuyerBusinessActivityDescription { get; set; } = string.Empty;
-	public string BuyerContactNumber { get; set; } = string.Empty;
+	public string KFormType { get; set; } = "K1";
+	public string KFormNumber { get; set; } = "12345";
 	public string SupplierName { get; set; } = string.Empty;
 	public string SupplierTIN { get; set; } = string.Empty;
 	public string SupplierIDType { get; set; } = string.Empty;
@@ -38,6 +26,6 @@ public class InvoiceDto
 	public string TotalPayableAmount { get; set; } = string.Empty;
 	public string TotalTaxAmount { get; set; } = string.Empty;
 	public string OriginalInvoiceNumber { get; set; } = string.Empty;
-	public string OriginalInvoiceUin { get; set; } = string.Empty;
+	public string InvoiceReferenceUin { get; set; } = string.Empty;
 	public List<LineItemsDto> LineItems { get; set; } = [];
 }
