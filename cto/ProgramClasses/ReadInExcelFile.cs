@@ -16,6 +16,9 @@ public class ReadInExcelFile
 			var matchingColumn = settings.AppConfigs.FileSettings.MatchColumn;
 			var invoiceWsName = settings.AppConfigs.FileSettings.MainFieldWorksheet;
 			var lineItemsWsName = settings.AppConfigs.FileSettings.LineItemsFieldWorksheet;
+			var invoiceLevelHeaders = settings.AppConfigs.FileSettings.InvoiceLevelHeaders;
+			var lineItemLevelHeaders = settings.AppConfigs.FileSettings.LineLevelHeaders;
+
 			var inputFolderName = FolderPaths.Instance.InputFolderName;
 			var inputFilePath = Path.Combine(FolderPaths.Instance.HoldFolderPath,
 			inputFolderName, inputFileName);
@@ -25,14 +28,37 @@ public class ReadInExcelFile
 			var fieldValues = excelFileData.Workbook.Worksheets[invoiceWsName];
 			var lineValues = excelFileData.Workbook.Worksheets[lineItemsWsName];
 			var matchingColumnIndex = GetColumnIndex(matchingColumn, fieldValues);
+			var invoiceHeaderIndexes = HeaderIndex(fieldValues, invoiceLevelHeaders);
+			var lineItemLevelHeadersIndexes = HeaderIndex(lineValues, lineItemLevelHeaders);
 
-			CreateDto(fieldValues, lineValues, matchingColumnIndex);
+			CreateDto(fieldValues,
+			lineValues,
+			invoiceHeaderIndexes,
+			lineItemLevelHeadersIndexes,
+			matchingColumnIndex);
 		}
 		catch (Exception ex)
 		{
 			Console.WriteLine(ex.Message);
 			throw;
 		}
+	}
+
+	private static Dictionary<string, int> HeaderIndex(ExcelWorksheet sheet,
+	List<string> headersList)
+	{
+		var headerIndex = new Dictionary<string, int>();
+
+		foreach (var header in headersList)
+		{
+			var columnIndex = GetColumnIndex(header, sheet);
+
+			if (columnIndex > 0)
+			{
+				headerIndex.Add(header, columnIndex);
+			}
+		}
+		return headerIndex;
 	}
 
 	private static int GetColumnIndex(string columnName, ExcelWorksheet sheet)
@@ -60,6 +86,8 @@ public class ReadInExcelFile
 
 	private static void CreateDto(ExcelWorksheet invoice,
 	 ExcelWorksheet line,
+	 Dictionary<string, int> invoiceHeaderIndexes,
+	 Dictionary<string, int> invoiceLineHeaderIndexes,
 	 int matchingColumnIndex)
 	{
 		try
@@ -92,7 +120,7 @@ public class ReadInExcelFile
 				.Select(cell => cell.Start.Row)
 				.ToList();
 
-				var invoiceDataDto = AddDataToDto.AddDataToInvoiceDto(invoiceLevelRow, row);
+				var invoiceDataDto = AddDataToDto.AddDataToInvoiceDto(invoiceLevelRow, invoiceHeaderIndexes, row);
 
 				var lineItemsDto = matchingRows
 				.Select(rowValue => AddDataToDto.AddDataToLineItemsDto

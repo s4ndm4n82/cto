@@ -67,6 +67,8 @@ public class FileSettings
 	public string LineItemsFieldWorksheet { get; set; } = string.Empty;
 	public string CustomsDeclarationWorksheet { get; set; } = string.Empty;
 	public string DummyBase64 { get; set; } = string.Empty;
+	public List<string> InvoiceLevelHeaders { get; set; } = [];
+	public List<string> LineLevelHeaders { get; set; } = [];
 }
 
 public class FieldSettings
