@@ -18,8 +18,6 @@ public class ReadInExcelFile
 			var lineColumnHeaders = settings.AppConfigs.FieldSettings.LineItemHeaders;
 			var invoiceWsName = settings.AppConfigs.FileSettings.MainFieldWorksheet;
 			var lineItemsWsName = settings.AppConfigs.FileSettings.LineItemsFieldWorksheet;
-			var invoiceLevelHeaders = settings.AppConfigs.FileSettings.InvoiceLevelHeaders;
-			var lineItemLevelHeaders = settings.AppConfigs.FileSettings.LineLevelHeaders;
 
 			var inputFolderName = FolderPaths.Instance.InputFolderName;
 			var inputFilePath = Path.Combine(FolderPaths.Instance.HoldFolderPath,
@@ -30,10 +28,14 @@ public class ReadInExcelFile
 			var fieldValues = excelFileData.Workbook.Worksheets[invoiceWsName];
 			var lineValues = excelFileData.Workbook.Worksheets[lineItemsWsName];
 			var matchingColumnIndex = GetMatchingColumnIndex(matchingColumn, fieldValues);
-			var mainColumnIndex = GetColumnIndex(fieldValues, mainColumnHeaders, matchingColumn);
-			var lineItemColumnIndex = GetColumnIndex(lineValues, lineColumnHeaders, matchingColumn);
+			var mainColumnIndex = GetColumnIndexes(fieldValues, mainColumnHeaders, matchingColumn);
+			var lineItemColumnIndex = GetColumnIndexes(lineValues, lineColumnHeaders, matchingColumn);
 
-			CreateDto(fieldValues, lineValues, mainColumnIndex, matchingColumnIndex);
+			CreateDto(fieldValues,
+				lineValues,
+				mainColumnIndex,
+				lineItemColumnIndex,
+				matchingColumnIndex);
 		}
 		catch (Exception ex)
 		{
@@ -50,11 +52,9 @@ public class ReadInExcelFile
 		{
 			for (var i = 1; i <= sheet.Dimension.End.Column; i++)
 			{
-				if (sheet.Cells[1, i].Value.ToString() == columnName)
-				{
-					columnIndex = i;
-					break;
-				}
+				if (sheet.Cells[1, i].Value.ToString() != columnName) continue;
+				columnIndex = i;
+				break;
 			}
 			return columnIndex;
 		}
@@ -65,7 +65,7 @@ public class ReadInExcelFile
 		}
 	}
 
-	private static Dictionary<string, int> GetColumnIndex(ExcelWorksheet sheet,
+	private static Dictionary<string, int> GetColumnIndexes(ExcelWorksheet sheet,
 	List<string> headerList,
 	string matchingHeader)
 	{
@@ -95,6 +95,7 @@ public class ReadInExcelFile
 	private static void CreateDto(ExcelWorksheet invoice,
 	 ExcelWorksheet line,
 	 Dictionary<string, int> columnIndexes,
+	 Dictionary<string, int> lineItemColumnIndex,
 	 int matchingColumnIndex)
 	{
 		try
@@ -109,9 +110,8 @@ public class ReadInExcelFile
 
 				var cell = invoiceLevelRow[row, matchingColumnIndex];
 
-				if (cell == null
-				|| cell.Value == null
-				|| string.IsNullOrEmpty(cell.Value.ToString()))
+				if (cell?.Value == null
+				    || string.IsNullOrEmpty(cell.Value.ToString()))
 				{
 					break;
 				}
@@ -120,18 +120,19 @@ public class ReadInExcelFile
 
 				var matchingRows = line.Cells
 				.Where(
-					cell => cell != null
-					&& cell.Value != null
-					&& cell.Value.ToString() == matchingInvoiceNumber
+					x => x is { Value: not null }
+					        && x.Value.ToString() == matchingInvoiceNumber
 					)
-				.Select(cell => cell.Start.Row)
+				.Select(y => y.Start.Row)
 				.ToList();
 
 				var invoiceDataDto = AddDataToDto.AddDataToInvoiceDto(invoiceLevelRow, row, columnIndexes);
 
 				var lineItemsDto = matchingRows
 				.Select(rowValue => AddDataToDto.AddDataToLineItemsDto
-				(line.Cells[rowValue, 1, rowValue, line.Dimension.End.Column], rowValue))
+				(line.Cells[rowValue, 1, rowValue, line.Dimension.End.Column],
+					rowValue,
+					lineItemColumnIndex))
 				.ToList();
 
 				invoiceDataDto.LineItems.AddRange(lineItemsDto);

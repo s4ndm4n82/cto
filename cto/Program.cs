@@ -1,7 +1,7 @@
 ﻿using cto.ProgramClasses;
 
 VersionIncrementer.IncrementVersion();
-//MakeBanner.AppName();
+MakeBanner.AppName();
 if (!CheckFolders.StartCheckFolders())
 {
 	Console.WriteLine("Folder Check Failed .... Press any key to exit ....");

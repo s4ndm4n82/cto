@@ -3,7 +3,7 @@ namespace cto.DTOs;
 public class LineItemsDto
 {
 	public string EInvoiceNumber { get; set; } = string.Empty;  // Mapped to "eInvoiceNumber"
-	public string ID { get; set; } = string.Empty;  // Mapped to "id"
+	public string Id { get; set; } = string.Empty;  // Mapped to "id"
 	public string DescriptionProductService { get; set; } = string.Empty;  // Mapped to "DescriptionProductService"
 	public string UnitPrice { get; set; } = string.Empty;
 	public string Subtotal { get; set; } = string.Empty;
