@@ -1,6 +1,9 @@
 using System.Reflection;
 using cto.Classes;
 using cto.DTOs;
+using cto.MagicWordClasses.InvoiceLevel;
+using cto.MagicWordClasses.LineItemLevel;
+using cto.MagicWordClasses.TpsFields;
 using cto.ProgramClasses;
 
 namespace cto.SupportClasses;
@@ -9,34 +12,46 @@ public class ApiJsonRequestHelperClass
 {
 	private static readonly Dictionary<string, string> FieldNameMap = new()
 	{
-		{ "Invoice Number", "EInvoiceNumber" },
-		{ "Invoice Currency Code", "CurrencyCode" },
-		{ "Currency Exchange Rate", "CurrencyExchangeRate" },
-		{ "Supplier Identification Number", "SupplierIDNo" },
-		{ "Supplier TIN", "SupplierTIN" },
-		{ "Supplier Name", "SupplierName" },
-		{ "Supplier Address", "SupplierAddressAddressLine0" },
-		{ "Supplier City Name", "SupplierAddressCityName" },
-		{ "Supplier Country", "SupplierAddressCountryCode" },
-		{ "Supplier Country Subentity Code", "SupplierAddressState" },
-		{ "Supplier Contact Number", "SupplierContactNumber" },
-		{ "Total Excluding Tax", "TotalExcludingTax" },
-		{ "Total Tax Amount", "TotalTaxAmount" },
-		{ "Total Including Tax", "TotalIncludingTax" },
-		{ "Total Payable Amount", "TotalPayableAmount" },
-		{ "Tax Type", "TaxType" }
+		{ TpsFieldsList.InvoiceNumber, HeaderNames.EInvoiceNumber },
+		{ TpsFieldsList.InvoiceCurrencyCode, HeaderNames.CurrencyCode },
+		{ TpsFieldsList.CurrencyExchangeRate, HeaderNames.CurrencyExchangeRate },
+		{ TpsFieldsList.KFormType, HeaderNames.KFormType},
+		{ TpsFieldsList.KFormNumber, HeaderNames.KFormNumber },
+		{ TpsFieldsList.SupplierIdentificationNumber, HeaderNames.SupplierIdNo },
+		{ TpsFieldsList.SupplierTin, HeaderNames.SupplierTin },
+		{ TpsFieldsList.SupplierName, HeaderNames.SupplierName },
+		{ TpsFieldsList.SupplierAddress, HeaderNames.SupplierAddress },
+		{ TpsFieldsList.SupplierCityName, HeaderNames.SupplierCity },
+		{ TpsFieldsList.SupplierCountry, HeaderNames.SupplierCountry },
+		{ TpsFieldsList.SupplierCountrySubentityCode, HeaderNames.SupplierState },
+		{ TpsFieldsList.SupplierContactNumber, HeaderNames.SupplierContactNumber },
+		{ TpsFieldsList.BuyerName, HeaderNames.BuyerName },
+		{ TpsFieldsList.BuyerRegistration, HeaderNames.BuyerIdNo },
+		{ TpsFieldsList.BuyerTin, HeaderNames.BuyerTin },
+		{ TpsFieldsList.BuyerAddress, HeaderNames.BuyerAddress },
+		{ TpsFieldsList.BuyerSstNumber, HeaderNames.BuyerSst },
+		{ TpsFieldsList.BuyerContactNumber, HeaderNames.BuyerContactNumber },
+		{ TpsFieldsList.BuyerCityName, HeaderNames.BuyerCity},
+		{ TpsFieldsList.BuyerState, HeaderNames.BuyerState },
+		{ TpsFieldsList.BuyerCountry, HeaderNames.BuyerCountry },
+		{ TpsFieldsList.TotalExcludingTax, HeaderNames.TotalExcludingTax },
+		{ TpsFieldsList.TotalTaxAmount, HeaderNames.TotalTaxAmount },
+		{ TpsFieldsList.TotalIncludingTax, HeaderNames.TotalIncludingTax },
+		{ TpsFieldsList.TotalPayableAmount, HeaderNames.TotalPayableAmount },
+		{ TpsFieldsList.OriginalInvoiceNumber, HeaderNames.OriginalInvoiceNumber },
+		{ TpsFieldsList.InvoiceReferenceNumber, HeaderNames.OriginalInvoiceUin}
 	};
 
 	private static readonly Dictionary<string, string> LineFieldNameMap = new()
 	{
-		{ "LI Description of Product or Service", "DescriptionProductService" },
-		{ "LI Unit Price", "UnitPrice" },
-		{ "LI Subtotal", "Subtotal" },
-		{ "LI Total Tax Amount", "TotalTaxAmount" },
-		{ "LI Total Excluding Tax", "TotalExcludingTax" },
-		{ "LI Discount Rate", "DiscountRate" },
-		{ "LI Discount Amount", "DiscountAmount" },
-		{ "LI Discount Description", "DiscountDescription" }
+		{ TpsFieldsList.LiDescriptionOfProductOrService, LineHeaderNames.LiDescription },
+		{ TpsFieldsList.LiUnitPrice, LineHeaderNames.LiUnitPrice },
+		{ TpsFieldsList.LiSubtotal, LineHeaderNames.LiSubtotal },
+		{ TpsFieldsList.LiTaxAmount, LineHeaderNames.LiTotalTaxAmount },
+		{ TpsFieldsList.LiExcludingTaxAmount, LineHeaderNames.LiTotalExcludingTax },
+		{ TpsFieldsList.LiDiscountRate, LineHeaderNames.LiDiscountRate },
+		{ TpsFieldsList.LiDiscountAmount, LineHeaderNames.LiDiscountAmount },
+		{ TpsFieldsList.LiDiscountDescription, LineHeaderNames.LiDiscountDescription },
 	};
 
 	public static List<JsonStringClass.Fields> CreateFieldsList(InvoiceDto invoiceDtoData)
@@ -52,26 +67,16 @@ public class ApiJsonRequestHelperClass
 		{
 			foreach (var field in fields)
 			{
-				var propertyName = string.Empty;
+				if (!FieldNameMap.TryGetValue(field, out var propertyName)) continue;
+				var property = properties.FirstOrDefault(p => p.Name.Equals(propertyName, StringComparison.OrdinalIgnoreCase));
 
-				if (FieldNameMap.TryGetValue(field, out propertyName))
-				{
-					var property = properties.FirstOrDefault(p => p.Name.Equals(propertyName, StringComparison.OrdinalIgnoreCase));
+				if (property == null)break;
 
-					if (property == null)
-					{
-						break;
-					}
+				var value = property.GetValue(invoiceDtoData)?.ToString();
 
-					var value = property.GetValue(invoiceDtoData)?.ToString();
+				if (string.IsNullOrEmpty(value)) continue;
 
-					if (string.IsNullOrEmpty(value))
-					{
-						break;
-					}
-
-					fieldsList.Add(new JsonStringClass.Fields { Name = field, Value = value });
-				}
+				fieldsList.Add(new JsonStringClass.Fields { Name = field, Value = value });
 			}
 
 			return fieldsList;
@@ -90,7 +95,6 @@ public class ApiJsonRequestHelperClass
 		var lineDefaultValue = settings.AppConfigs.FieldSettings.LineDefaultValues;
 		var tables = new List<JsonStringClass.Tables>();
 		var table = new JsonStringClass.Tables();
-		var value = string.Empty;
 
 		try
 		{
@@ -103,9 +107,9 @@ public class ApiJsonRequestHelperClass
 
 				foreach (var lineField in lineFields)
 				{
-					var propertyName = string.Empty;
-
-					if (LineFieldNameMap.TryGetValue(lineField, out propertyName))
+					string? value;
+					
+					if (LineFieldNameMap.TryGetValue(lineField, out var propertyName))
 					{
 						var property = lineItem.GetType().GetProperty(propertyName);
 

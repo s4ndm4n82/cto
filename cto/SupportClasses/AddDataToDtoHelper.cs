@@ -1,4 +1,7 @@
-﻿namespace cto.SupportClasses;
+﻿using cto.MagicWordClasses.InvoiceLevel;
+using cto.MagicWordClasses.LineItemLevel;
+
+namespace cto.SupportClasses;
 
 public class AddDataToDtoHelper
 {
@@ -43,7 +46,7 @@ public class AddDataToDtoHelper
                 { HeaderNames.SupplierAddress, columnIndex.GetValueOrDefault(ExcelHeaderNames.SupplierAddress, 0) },
                 { HeaderNames.SupplierCity, columnIndex.GetValueOrDefault(ExcelHeaderNames.SupplierCity, 0) },
                 { HeaderNames.SupplierState, columnIndex.GetValueOrDefault(ExcelHeaderNames.SupplierState, 0) },
-                { HeaderNames.BuyerCountry, columnIndex.GetValueOrDefault(ExcelHeaderNames.SupplierCountry, 0) },
+                { HeaderNames.SupplierCountry, columnIndex.GetValueOrDefault(ExcelHeaderNames.SupplierCountry, 0) },
                 { HeaderNames.SupplierSst, columnIndex.GetValueOrDefault(ExcelHeaderNames.SupplierSst, 0) },
                 { HeaderNames.SupplierMisc, columnIndex.GetValueOrDefault(ExcelHeaderNames.SupplierMisc, 0) },
                 {
@@ -74,6 +77,53 @@ public class AddDataToDtoHelper
         catch (Exception e)
         {
             Console.WriteLine(e.Message);
+            throw;
+        }
+    }
+
+    public static Dictionary<string, int> GetLineColumnIndexes(Dictionary<string, int> columnIndex)
+    {
+        try
+        {
+            return new Dictionary<string, int>
+            {
+                {
+                    LineHeaderNames.LiDescription,
+                    columnIndex.GetValueOrDefault(ExcelLineHeaderNames.DescriptionProductService, 0)
+                },
+                { 
+                    LineHeaderNames.LiUnitPrice,
+                    columnIndex.GetValueOrDefault(ExcelLineHeaderNames.UnitPrice, 0)
+                },
+                {
+                    LineHeaderNames.LiSubtotal,
+                    columnIndex.GetValueOrDefault(ExcelLineHeaderNames.Subtotal, 0)
+                },
+                {
+                    LineHeaderNames.LiTotalTaxAmount,
+                    columnIndex.GetValueOrDefault(ExcelLineHeaderNames.TotalTaxAmount, 0)
+                },
+                {
+                    LineHeaderNames.LiTotalExcludingTax,
+                    columnIndex.GetValueOrDefault(ExcelLineHeaderNames.TotalExcludingTax, 0)
+                },
+                {
+                    LineHeaderNames.LiDiscountRate,
+                    columnIndex.GetValueOrDefault(ExcelLineHeaderNames.DiscountRate, 0)
+                },
+                {
+                    LineHeaderNames.LiDiscountAmount,
+                    columnIndex.GetValueOrDefault(ExcelLineHeaderNames.DiscountAmount, 0)
+                },
+                {
+                    LineHeaderNames.LiDiscountDescription,
+                    columnIndex.GetValueOrDefault(ExcelLineHeaderNames.DiscountDescription, 0)
+                }
+            };
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
             throw;
         }
     }

@@ -12,7 +12,6 @@ public class ReadInExcelFile
 		{
 			FolderPaths.Instance.InitializePaths();
 			var settings = ReadSettings.ReadAppSettings();
-			var inputFileName = settings.AppConfigs.FileSettings.FileName;
 			var matchingColumn = settings.AppConfigs.FileSettings.MatchColumn;
 			var mainColumnHeaders = settings.AppConfigs.FieldSettings.MainFieldHeaders;
 			var lineColumnHeaders = settings.AppConfigs.FieldSettings.LineItemHeaders;
@@ -20,9 +19,17 @@ public class ReadInExcelFile
 			var lineItemsWsName = settings.AppConfigs.FileSettings.LineItemsFieldWorksheet;
 
 			var inputFolderName = FolderPaths.Instance.InputFolderName;
-			var inputFilePath = Path.Combine(FolderPaths.Instance.HoldFolderPath,
-			inputFolderName, inputFileName);
+			var inputFolderPath = Path.Combine(FolderPaths.Instance.HoldFolderPath, inputFolderName);
+			var inputFilePath = Directory.GetFiles(inputFolderPath).FirstOrDefault();
 
+			if (string.IsNullOrEmpty(inputFilePath))
+			{
+				Console.WriteLine("Input folder is empty ...");
+				Console.WriteLine("Press any key to exit ...");
+				Console.Read();
+				Environment.Exit(0);
+			}
+			
 			ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
 			using var excelFileData = new ExcelPackage(new FileInfo(inputFilePath));
 			var fieldValues = excelFileData.Workbook.Worksheets[invoiceWsName];
@@ -126,10 +133,10 @@ public class ReadInExcelFile
 				.Select(y => y.Start.Row)
 				.ToList();
 
-				var invoiceDataDto = AddDataToDto.AddDataToInvoiceDto(invoiceLevelRow, row, columnIndexes);
+				var invoiceDataDto = AddDataToInvoiceDto.AddDataToInvoiceDtoFn(invoiceLevelRow, row, columnIndexes);
 
 				var lineItemsDto = matchingRows
-				.Select(rowValue => AddDataToDto.AddDataToLineItemsDto
+				.Select(rowValue => AddDataToLineItemsDto.AddDataToLineItemsDtoFn
 				(line.Cells[rowValue, 1, rowValue, line.Dimension.End.Column],
 					rowValue,
 					lineItemColumnIndex))

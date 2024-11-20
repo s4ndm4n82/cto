@@ -1,4 +1,4 @@
-﻿namespace cto.SupportClasses;
+﻿namespace cto.MagicWordClasses.InvoiceLevel;
 
 public static class HeaderNames
 {
