@@ -19,13 +19,13 @@ public class MakeBanner
 		HorizontalLine();
 	}
 
-	public static void HorizontalLine()
+	private static void HorizontalLine()
 	{
 		const char ch = '-';
 
 		while (true)
 		{
-			for (int x = 0; x < Console.WindowWidth; x++)
+			for (var x = 0; x < Console.WindowWidth; x++)
 			{
 				Console.Write(ch);
 			}
