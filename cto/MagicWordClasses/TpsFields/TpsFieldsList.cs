@@ -34,7 +34,7 @@ public class TpsFieldsList
     public const string LiUnitPrice = "LI Unit Price";
     public const string LiSubtotal = "LI Subtotal";
     public const string LiTaxAmount = "LI Tax Amount";
-    public const string LiExcludingTaxAmount = "LI Excluding Tax Amount";
+    public const string LiTotalExcludingTax = "LI Total Excluding Tax";
     public const string LiDiscountRate = "LI Discount Rate";
     public const string LiDiscountAmount = "LI Discount Amount";
     public const string LiDiscountDescription = "LI Discount Description";

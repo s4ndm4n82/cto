@@ -25,35 +25,35 @@ public class AddDataToLineItemsDto
         var lineItemDto = new LineItemsDto
         {
             DescriptionProductService = descriptionColumnIndex > 0
-                ? lineItemData[currentRow, 3]?.Value?.ToString() ?? string.Empty
+                ? lineItemData[currentRow, descriptionColumnIndex]?.Value?.ToString() ?? string.Empty
                 : string.Empty,
             
             UnitPrice = unitPriceColumnIndex > 0
-                ? lineItemData[currentRow, 4]?.Value?.ToString() ?? string.Empty
+                ? lineItemData[currentRow, unitPriceColumnIndex]?.Value?.ToString() ?? string.Empty
                 : string.Empty,
             
             Subtotal = subtotalColumnIndex > 0
-                ? lineItemData[currentRow, 5]?.Value?.ToString() ?? string.Empty
+                ? lineItemData[currentRow, subtotalColumnIndex]?.Value?.ToString() ?? string.Empty
                 : string.Empty,
             
             TotalTaxAmount = totalTaxAmountColumnIndex > 0
-                ? lineItemData[currentRow, 6]?.Value?.ToString() ?? string.Empty
+                ? lineItemData[currentRow, totalTaxAmountColumnIndex]?.Value?.ToString() ?? string.Empty
                 : string.Empty,
             
             TotalExcludingTax = totalExcludingTaxColumnIndex > 0
-                ? lineItemData[currentRow, 7]?.Value?.ToString() ?? string.Empty
+                ? lineItemData[currentRow, totalExcludingTaxColumnIndex]?.Value?.ToString() ?? string.Empty
                 : string.Empty,
             
             DiscountRate = discountRateColumnIndex > 0
-                ? lineItemData[currentRow, 8]?.Value?.ToString() ?? string.Empty
+                ? lineItemData[currentRow, discountRateColumnIndex]?.Value?.ToString() ?? string.Empty
                 : string.Empty,
             
             DiscountAmount = discountAmountColumnIndex > 0
-                ? lineItemData[currentRow, 9]?.Value?.ToString() ?? string.Empty
+                ? lineItemData[currentRow, discountAmountColumnIndex]?.Value?.ToString() ?? string.Empty
                 : string.Empty,
             
             DiscountDescription = discountDescriptionColumnIndex > 0
-                ? lineItemData[currentRow, 10]?.Value?.ToString() ?? string.Empty
+                ? lineItemData[currentRow, discountDescriptionColumnIndex]?.Value?.ToString() ?? string.Empty
                 : string.Empty
         };
 

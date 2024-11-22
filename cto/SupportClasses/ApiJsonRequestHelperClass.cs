@@ -48,7 +48,7 @@ public class ApiJsonRequestHelperClass
 		{ TpsFieldsList.LiUnitPrice, LineHeaderNames.LiUnitPrice },
 		{ TpsFieldsList.LiSubtotal, LineHeaderNames.LiSubtotal },
 		{ TpsFieldsList.LiTaxAmount, LineHeaderNames.LiTotalTaxAmount },
-		{ TpsFieldsList.LiExcludingTaxAmount, LineHeaderNames.LiTotalExcludingTax },
+		{ TpsFieldsList.LiTotalExcludingTax, LineHeaderNames.LiTotalExcludingTax },
 		{ TpsFieldsList.LiDiscountRate, LineHeaderNames.LiDiscountRate },
 		{ TpsFieldsList.LiDiscountAmount, LineHeaderNames.LiDiscountAmount },
 		{ TpsFieldsList.LiDiscountDescription, LineHeaderNames.LiDiscountDescription },
@@ -113,11 +113,8 @@ public class ApiJsonRequestHelperClass
 					{
 						var property = lineItem.GetType().GetProperty(propertyName);
 
-						if (property == null)
-						{
-							break;
-						}
-
+						if (property == null) break;
+						
 						value = property.GetValue(lineItem)?.ToString();
 					}
 					else
@@ -128,10 +125,7 @@ public class ApiJsonRequestHelperClass
 						.FirstOrDefault();
 					}
 
-					if (string.IsNullOrEmpty(value))
-					{
-						break;
-					}
+					if (string.IsNullOrEmpty(value)) break;
 
 					row.Fields.Add(new JsonStringClass.LineFields { Name = lineField, Value = value });
 				}
