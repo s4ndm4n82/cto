@@ -13,4 +13,7 @@
     <SourceRoot Include="G:\Users\S4NDM4N\.nuget\packages\" />
     <SourceRoot Include="D:\Microsoft Visual Studio\2022\Shared\NuGetPackages\" />
   </ItemGroup>
+  <PropertyGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
+    <PkgMicrosoft_VisualStudio_SlowCheetah Condition=" '$(PkgMicrosoft_VisualStudio_SlowCheetah)' == '' ">G:\Users\S4NDM4N\.nuget\packages\microsoft.visualstudio.slowcheetah\4.0.50</PkgMicrosoft_VisualStudio_SlowCheetah>
+  </PropertyGroup>
 </Project>
