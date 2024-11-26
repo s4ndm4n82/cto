@@ -8,14 +8,17 @@ public class MakeBanner
     {
         var assembly = Assembly.GetExecutingAssembly().GetName();
         var appVersion = assembly.Version;
+        var appName = assembly.Name;
 
-        var settings = ReadSettings.ReadAppSettings();
-        var appName = settings.AppConfigs.AppSettings.AppName;
-        var padding = (Console.WindowWidth - appName.Length) / 2;
-        var title = new string(' ', padding) + appName + " v" + appVersion;
+        if (appName != null)
+        {
+            var padding = (Console.WindowWidth - appName.Length) / 2;
+            var title = new string(' ', padding) + appName + " v" + appVersion;
 
-        HorizontalLine();
-        Console.WriteLine(title);
+            HorizontalLine();
+            Console.WriteLine(title);
+        }
+
         HorizontalLine();
     }
 
