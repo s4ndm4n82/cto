@@ -7,7 +7,6 @@ public class AppSettingsClass
 
 public class AppConfigs
 {
-	public required AppSettings AppSettings { get; set; }
 	public required ProjectSettings ProjectSettings { get; set; }
 	public required FileDeliverSettings FileDeliverSettings { get; set; }
 	public required FolderDeliverSettings FolderDeliverSettings { get; set; }
@@ -15,11 +14,6 @@ public class AppConfigs
 	public required FileSettings FileSettings { get; set; }
 	public required UploadSettings UploadSettings { get; set; }
 	public required FieldSettings FieldSettings { get; set; }
-}
-
-public class AppSettings
-{
-	public string AppName { get; set; } = string.Empty;
 }
 
 public class ProjectSettings
