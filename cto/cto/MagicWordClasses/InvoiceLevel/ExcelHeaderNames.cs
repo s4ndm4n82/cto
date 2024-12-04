@@ -2,7 +2,7 @@
 
 public class ExcelHeaderNames
 {
-    public const string LineId = "Line ID";
+    public const string LineId = "Line.ID";
     public const string EInvoiceNumber = "eInvoiceNumber";
     public const string Classification = "Classification";
     public const string CurrencyCode = "CurrencyCode";
@@ -33,10 +33,12 @@ public class ExcelHeaderNames
     public const string SupplierMisc = "Supplier.MSIC.Code";
     public const string SupplierBusinessActivityDescription = "Supplier.BusinessActivityDescription";
     public const string SupplierContactNumber = "Supplier.ContactNumber";
-    public const string TotalExcludingTax = "TotalExcludingTax";
-    public const string TotalIncludingTax = "TotalIncludingTax";
-    public const string TotalPayableAmount = "TotalPayableAmount";
-    public const string TotalTaxAmount = "TotalTaxAmount";
+    public const string TaxRate = "Tax.Rate";
+    public const string TaxType = "Tax.Type";
+    public const string TotalExcludingTax = "Total.Excluding.Tax";
+    public const string TotalIncludingTax = "Total.Including.Tax";
+    public const string TotalPayableAmount = "Total.Payable.Amount";
+    public const string TotalTaxAmount = "Total.Tax.Amount";
     public const string OriginalInvoiceNumber = "Original.Invoice.Number";
     public const string OriginalInvoiceUin = "Original.Invoice.UIN";
 }

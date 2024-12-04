@@ -33,6 +33,8 @@ public static class HeaderNames
     public const string SupplierMisc = "SupplierMisc";
     public const string SupplierBusinessActivityDescription = "SupplierBusinessActivityDescription";
     public const string SupplierContactNumber = "SupplierContactNumber";
+    public const string TaxRate = "TaxRate";
+    public const string TaxType = "TaxType";
     public const string TotalExcludingTax = "TotalExcludingTax";
     public const string TotalIncludingTax = "TotalIncludingTax";
     public const string TotalPayableAmount = "TotalPayableAmount";

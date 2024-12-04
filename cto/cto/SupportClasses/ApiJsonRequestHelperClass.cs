@@ -34,6 +34,8 @@ public class ApiJsonRequestHelperClass
 		{ TpsFieldsList.BuyerCityName, HeaderNames.BuyerCity},
 		{ TpsFieldsList.BuyerState, HeaderNames.BuyerState },
 		{ TpsFieldsList.BuyerCountry, HeaderNames.BuyerCountry },
+		{ TpsFieldsList.MainTaxRate, HeaderNames.TaxRate },
+		{ TpsFieldsList.MainTaxType, HeaderNames.TaxType },
 		{ TpsFieldsList.TotalExcludingTax, HeaderNames.TotalExcludingTax },
 		{ TpsFieldsList.TotalTaxAmount, HeaderNames.TotalTaxAmount },
 		{ TpsFieldsList.TotalIncludingTax, HeaderNames.TotalIncludingTax },
@@ -44,9 +46,12 @@ public class ApiJsonRequestHelperClass
 
 	private static readonly Dictionary<string, string> LineFieldNameMap = new()
 	{
+		{ TpsFieldsList.LiClassification, HeaderNames.Classification },
 		{ TpsFieldsList.LiDescriptionOfProductOrService, LineHeaderNames.LiDescription },
 		{ TpsFieldsList.LiUnitPrice, LineHeaderNames.LiUnitPrice },
 		{ TpsFieldsList.LiSubtotal, LineHeaderNames.LiSubtotal },
+		{ TpsFieldsList.LiTaxRate, LineHeaderNames.LiTaxRate },
+		{ TpsFieldsList.LiTaxType, LineHeaderNames.LiTaxType },
 		{ TpsFieldsList.LiTaxAmount, LineHeaderNames.LiTotalTaxAmount },
 		{ TpsFieldsList.LiTotalExcludingTax, LineHeaderNames.LiTotalExcludingTax },
 		{ TpsFieldsList.LiDiscountRate, LineHeaderNames.LiDiscountRate },

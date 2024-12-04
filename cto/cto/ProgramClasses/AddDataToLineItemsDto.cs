@@ -1,4 +1,5 @@
 ﻿using cto.DTOs;
+using cto.MagicWordClasses.InvoiceLevel;
 using cto.MagicWordClasses.LineItemLevel;
 using cto.SupportClasses;
 using OfficeOpenXml;
@@ -16,6 +17,8 @@ public class AddDataToLineItemsDto
         var descriptionColumnIndex = lineItemColumnIndexes[ExcelLineHeaderNames.DescriptionProductService];
         var unitPriceColumnIndex = lineItemColumnIndexes[ExcelLineHeaderNames.UnitPrice];
         var subtotalColumnIndex = lineItemColumnIndexes[ExcelLineHeaderNames.Subtotal];
+        var taxRateColumnIndex = lineItemColumnIndexes[ExcelLineHeaderNames.TaxRate];
+        var taxTypeColumnIndex = lineItemColumnIndexes[ExcelLineHeaderNames.TaxType];
         var totalTaxAmountColumnIndex = lineItemColumnIndexes[ExcelLineHeaderNames.TotalTaxAmount];
         var totalExcludingTaxColumnIndex = lineItemColumnIndexes[ExcelLineHeaderNames.TotalExcludingTax];
         var discountRateColumnIndex = lineItemColumnIndexes[ExcelLineHeaderNames.DiscountRate];
@@ -23,7 +26,7 @@ public class AddDataToLineItemsDto
         var discountDescriptionColumnIndex = lineItemColumnIndexes[ExcelLineHeaderNames.DiscountDescription];
             
         var lineItemDto = new LineItemsDto
-        {
+        {   
             DescriptionProductService = descriptionColumnIndex > 0
                 ? lineItemData[currentRow, descriptionColumnIndex]?.Value?.ToString() ?? string.Empty
                 : string.Empty,
@@ -34,6 +37,14 @@ public class AddDataToLineItemsDto
             
             Subtotal = subtotalColumnIndex > 0
                 ? lineItemData[currentRow, subtotalColumnIndex]?.Value?.ToString() ?? string.Empty
+                : string.Empty,
+            
+            TaxRate = taxRateColumnIndex > 0
+                ? lineItemData[currentRow, taxRateColumnIndex]?.Value?.ToString() ?? string.Empty
+                : string.Empty,
+            
+            TaxType = taxTypeColumnIndex > 0
+                ? lineItemData[currentRow, taxTypeColumnIndex]?.Value?.ToString() ?? string.Empty
                 : string.Empty,
             
             TotalTaxAmount = totalTaxAmountColumnIndex > 0

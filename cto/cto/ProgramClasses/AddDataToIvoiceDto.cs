@@ -47,6 +47,8 @@ public class AddDataToInvoiceDto
 			var supplierBusinessActivityDescriptionColumnIndex =
 				columnIndexes[HeaderNames.SupplierBusinessActivityDescription];
 			var supplierContactNumberColumnIndex = columnIndexes[HeaderNames.SupplierContactNumber];
+			var taxTypeColumnIndex = columnIndexes[HeaderNames.TaxType];
+			var taxRateColumnIndex = columnIndexes[HeaderNames.TaxRate];
 			var totalExcludingTaxColumnIndex = columnIndexes[HeaderNames.TotalExcludingTax];
 			var totalIncludingTaxColumnIndex = columnIndexes[HeaderNames.TotalIncludingTax];
 			var totalPayableAmountColumnIndex = columnIndexes[HeaderNames.TotalPayableAmount];
@@ -179,6 +181,14 @@ public class AddDataToInvoiceDto
 
 				SupplierContactNumber = supplierContactNumberColumnIndex > 0
 					? invoiceData[currentRow, supplierContactNumberColumnIndex]?.Value?.ToString() ?? string.Empty
+					: string.Empty,
+				
+				MainTaxRate = taxRateColumnIndex > 0
+					? invoiceData[currentRow, taxRateColumnIndex]?.Value?.ToString() ?? string.Empty
+					: string.Empty,
+				
+				MainTaxType = taxRateColumnIndex > 0
+					? invoiceData[currentRow, taxRateColumnIndex]?.Value?.ToString() ?? string.Empty
 					: string.Empty,
 
 				TotalExcludingTax = totalExcludingTaxColumnIndex > 0

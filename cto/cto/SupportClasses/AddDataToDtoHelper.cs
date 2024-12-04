@@ -57,6 +57,8 @@ public class AddDataToDtoHelper
                     HeaderNames.SupplierContactNumber,
                     columnIndex.GetValueOrDefault(ExcelHeaderNames.SupplierContactNumber, 0)
                 },
+                { HeaderNames.TaxRate, columnIndex.GetValueOrDefault(ExcelHeaderNames.TaxRate, 0) },
+                { HeaderNames.TaxType, columnIndex.GetValueOrDefault(ExcelHeaderNames.TaxType, 0) },
                 { HeaderNames.TotalExcludingTax, columnIndex.GetValueOrDefault(ExcelHeaderNames.TotalExcludingTax, 0) },
                 { HeaderNames.TotalIncludingTax, columnIndex.GetValueOrDefault(ExcelHeaderNames.TotalIncludingTax, 0) },
                 {
@@ -98,6 +100,14 @@ public class AddDataToDtoHelper
                 {
                     LineHeaderNames.LiSubtotal,
                     columnIndex.GetValueOrDefault(ExcelLineHeaderNames.Subtotal, 0)
+                },
+                {
+                    LineHeaderNames.LiTaxRate,
+                    columnIndex.GetValueOrDefault(ExcelLineHeaderNames.TaxRate, 0)
+                },
+                {
+                    LineHeaderNames.LiTaxType,
+                    columnIndex.GetValueOrDefault(ExcelLineHeaderNames.TaxType, 0)
                 },
                 {
                     LineHeaderNames.LiTotalTaxAmount,

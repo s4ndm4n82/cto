@@ -59,7 +59,8 @@ public class ReadInExcelFile
 		{
 			for (var i = 1; i <= sheet.Dimension.End.Column; i++)
 			{
-				if (sheet.Cells[1, i].Value.ToString() != columnName) continue;
+				var sheetValue = sheet.Cells[1, i].Value?.ToString();
+				if (string.IsNullOrEmpty(sheetValue) || sheetValue != columnName) continue;
 				columnIndex = i;
 				break;
 			}

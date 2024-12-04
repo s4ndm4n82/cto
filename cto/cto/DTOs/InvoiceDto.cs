@@ -33,6 +33,8 @@ public class InvoiceDto
 	public string SupplierMsicCode { get; set; } = string.Empty;
 	public string SupplierBusinessActivityDescription { get; set; } = string.Empty;
 	public string SupplierContactNumber { get; set; } = string.Empty;
+	public string MainTaxRate { get; set; } = string.Empty;
+	public string MainTaxType { get; set; } = string.Empty;
 	public string TotalExcludingTax { get; set; } = string.Empty;
 	public string TotalIncludingTax { get; set; } = string.Empty;
 	public string TotalPayableAmount { get; set; } = string.Empty;
