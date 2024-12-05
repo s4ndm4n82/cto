@@ -1,24 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "F:\\Users\\S4NDM4N\\Development\\cto\\cto\\cto\\cto.csproj": {}
+    "G:\\Users\\S4NDM4N\\Development\\Repos\\cto\\cto\\cto.csproj": {}
   },
   "projects": {
-    "F:\\Users\\S4NDM4N\\Development\\cto\\cto\\cto\\cto.csproj": {
+    "G:\\Users\\S4NDM4N\\Development\\Repos\\cto\\cto\\cto.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "F:\\Users\\S4NDM4N\\Development\\cto\\cto\\cto\\cto.csproj",
+        "projectUniqueName": "G:\\Users\\S4NDM4N\\Development\\Repos\\cto\\cto\\cto.csproj",
         "projectName": "cto",
-        "projectPath": "F:\\Users\\S4NDM4N\\Development\\cto\\cto\\cto\\cto.csproj",
-        "packagesPath": "F:\\Users\\S4NDM4N\\.nuget\\packages\\",
-        "outputPath": "F:\\Users\\S4NDM4N\\Development\\cto\\cto\\cto\\obj\\",
+        "projectPath": "G:\\Users\\S4NDM4N\\Development\\Repos\\cto\\cto\\cto.csproj",
+        "packagesPath": "G:\\Users\\S4NDM4N\\.nuget\\packages\\",
+        "outputPath": "G:\\Users\\S4NDM4N\\Development\\Repos\\cto\\cto\\obj\\",
         "projectStyle": "PackageReference",
         "UsingMicrosoftNETSdk": false,
         "fallbackFolders": [
-          "D:\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+          "D:\\Microsoft Visual Studio\\2022\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "F:\\Users\\S4NDM4N\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "G:\\Users\\S4NDM4N\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -43,7 +43,7 @@
         "restoreAuditProperties": {
           "enableAudit": "true",
           "auditLevel": "low",
-          "auditMode": "direct"
+          "auditMode": "all"
         }
       },
       "frameworks": {
@@ -97,7 +97,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.101/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.100/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

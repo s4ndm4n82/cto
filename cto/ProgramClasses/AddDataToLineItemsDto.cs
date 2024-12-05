@@ -8,25 +8,28 @@ namespace cto.ProgramClasses;
 
 public class AddDataToLineItemsDto
 {
-    public static LineItemsDto AddDataToLineItemsDtoFn(ExcelRange lineItemData,
+    public static LineItemsDto AddDataToLineItemsDtoFn(InvoiceDto invoiceDto,
+        ExcelRange lineItemData,
         int currentRow,
         Dictionary<string, int> columnIndexes)
     {
         var lineItemColumnIndexes = AddDataToDtoHelper.GetLineColumnIndexes(columnIndexes);
         
-        var descriptionColumnIndex = lineItemColumnIndexes[ExcelLineHeaderNames.DescriptionProductService];
-        var unitPriceColumnIndex = lineItemColumnIndexes[ExcelLineHeaderNames.UnitPrice];
-        var subtotalColumnIndex = lineItemColumnIndexes[ExcelLineHeaderNames.Subtotal];
-        var taxRateColumnIndex = lineItemColumnIndexes[ExcelLineHeaderNames.TaxRate];
-        var taxTypeColumnIndex = lineItemColumnIndexes[ExcelLineHeaderNames.TaxType];
-        var totalTaxAmountColumnIndex = lineItemColumnIndexes[ExcelLineHeaderNames.TotalTaxAmount];
-        var totalExcludingTaxColumnIndex = lineItemColumnIndexes[ExcelLineHeaderNames.TotalExcludingTax];
-        var discountRateColumnIndex = lineItemColumnIndexes[ExcelLineHeaderNames.DiscountRate];
-        var discountAmountColumnIndex = lineItemColumnIndexes[ExcelLineHeaderNames.DiscountAmount];
-        var discountDescriptionColumnIndex = lineItemColumnIndexes[ExcelLineHeaderNames.DiscountDescription];
+        var descriptionColumnIndex = lineItemColumnIndexes[LineHeaderNames.LiDescription];
+        var unitPriceColumnIndex = lineItemColumnIndexes[LineHeaderNames.LiUnitPrice];
+        var subtotalColumnIndex = lineItemColumnIndexes[LineHeaderNames.LiSubtotal];
+        var taxRateColumnIndex = lineItemColumnIndexes[LineHeaderNames.LiTaxRate];
+        var taxTypeColumnIndex = lineItemColumnIndexes[LineHeaderNames.LiTaxType];
+        var totalTaxAmountColumnIndex = lineItemColumnIndexes[LineHeaderNames.LiTotalTaxAmount];
+        var totalExcludingTaxColumnIndex = lineItemColumnIndexes[LineHeaderNames.LiTotalExcludingTax];
+        var discountRateColumnIndex = lineItemColumnIndexes[LineHeaderNames.LiDiscountRate];
+        var discountAmountColumnIndex = lineItemColumnIndexes[LineHeaderNames.LiDiscountAmount];
+        var discountDescriptionColumnIndex = lineItemColumnIndexes[LineHeaderNames.LiDiscountDescription];
             
         var lineItemDto = new LineItemsDto
-        {   
+        {
+            Classification = invoiceDto.Classification,
+            
             DescriptionProductService = descriptionColumnIndex > 0
                 ? lineItemData[currentRow, descriptionColumnIndex]?.Value?.ToString() ?? string.Empty
                 : string.Empty,

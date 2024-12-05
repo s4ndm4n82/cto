@@ -118,7 +118,7 @@ public class ApiJsonRequestHelperClass
 					{
 						var property = lineItem.GetType().GetProperty(propertyName);
 
-						if (property == null) break;
+						if (property == null) continue;
 						
 						value = property.GetValue(lineItem)?.ToString();
 					}

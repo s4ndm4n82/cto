@@ -8,7 +8,6 @@ public class AppSettingsClass
 public class AppConfigs
 {
 	public required ProjectSettings ProjectSettings { get; set; }
-	public required FileDeliverSettings FileDeliverSettings { get; set; }
 	public required FolderDeliverSettings FolderDeliverSettings { get; set; }
 	public required FtpDeliverSettings FtpDeliverSettings { get; set; }
 	public required FileSettings FileSettings { get; set; }
@@ -23,12 +22,6 @@ public class ProjectSettings
 	public string ImportProjectId { get; set; } = string.Empty;
 	public string ImportQueue { get; set; } = string.Empty;
 	public string ImportTemplateKey { get; set; } = string.Empty;
-}
-
-public class FileDeliverSettings
-{
-	public string DeliveryExtension { get; set; } = string.Empty;
-	public string DeliveryMethod { get; set; } = string.Empty;
 }
 
 public class FolderDeliverSettings
@@ -55,11 +48,9 @@ public class FtpDeliverSettings
 public class FileSettings
 {
 	public bool RemoveRootFiles { get; set; }
-	public string FileName { get; set; } = string.Empty;
 	public string MatchColumn { get; set; } = string.Empty;
 	public string MainFieldWorksheet { get; set; } = string.Empty;
 	public string LineItemsFieldWorksheet { get; set; } = string.Empty;
-	public string CustomsDeclarationWorksheet { get; set; } = string.Empty;
 	public string DummyBase64 { get; set; } = string.Empty;
 	public List<string> InvoiceLevelHeaders { get; set; } = [];
 	public List<string> LineLevelHeaders { get; set; } = [];

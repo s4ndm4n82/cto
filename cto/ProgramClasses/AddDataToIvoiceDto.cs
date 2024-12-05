@@ -187,8 +187,8 @@ public class AddDataToInvoiceDto
 					? invoiceData[currentRow, taxRateColumnIndex]?.Value?.ToString() ?? string.Empty
 					: string.Empty,
 				
-				MainTaxType = taxRateColumnIndex > 0
-					? invoiceData[currentRow, taxRateColumnIndex]?.Value?.ToString() ?? string.Empty
+				MainTaxType = taxTypeColumnIndex > 0
+					? invoiceData[currentRow, taxTypeColumnIndex]?.Value?.ToString() ?? string.Empty
 					: string.Empty,
 
 				TotalExcludingTax = totalExcludingTaxColumnIndex > 0

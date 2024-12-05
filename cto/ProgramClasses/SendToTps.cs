@@ -26,6 +26,7 @@ public class SendToTps
 
             if (response.StatusCode != HttpStatusCode.OK)
             {
+                Console.WriteLine($"Server Error: {response.StatusCode} - {response.Content}");
                 return false;
             }
             Console.WriteLine($"{invoiceNumber}.pdf uploaded successfully.");

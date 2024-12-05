@@ -35,8 +35,8 @@ public class ReadInExcelFile
 			var fieldValues = excelFileData.Workbook.Worksheets[invoiceWsName];
 			var lineValues = excelFileData.Workbook.Worksheets[lineItemsWsName];
 			var matchingColumnIndex = GetMatchingColumnIndex(matchingColumn, fieldValues);
-			var mainColumnIndex = GetColumnIndexes(fieldValues, mainColumnHeaders, matchingColumn);
-			var lineItemColumnIndex = GetColumnIndexes(lineValues, lineColumnHeaders, matchingColumn);
+			var mainColumnIndex = GetColumnIndexes(fieldValues, mainColumnHeaders);
+			var lineItemColumnIndex = GetColumnIndexes(lineValues, lineColumnHeaders);
 
 			CreateDto(fieldValues,
 				lineValues,
@@ -74,8 +74,7 @@ public class ReadInExcelFile
 	}
 
 	private static Dictionary<string, int> GetColumnIndexes(ExcelWorksheet sheet,
-	List<string> headerList,
-	string matchingHeader)
+	List<string> headerList)
 	{
 		var columnIndex = new Dictionary<string, int>();
 
@@ -138,7 +137,8 @@ public class ReadInExcelFile
 
 				var lineItemsDto = matchingRows
 				.Select(rowValue => AddDataToLineItemsDto.AddDataToLineItemsDtoFn
-				(line.Cells[rowValue, 1, rowValue, line.Dimension.End.Column],
+				(invoiceDataDto,
+					line.Cells[rowValue, 1, rowValue, line.Dimension.End.Column],
 					rowValue,
 					lineItemColumnIndex))
 				.ToList();

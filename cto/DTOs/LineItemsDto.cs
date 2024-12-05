@@ -2,6 +2,7 @@
 
 public class LineItemsDto
 {
+    public string Classification { get; set; } = string.Empty;
     public string DescriptionProductService { get; set; } = string.Empty;
     public string UnitPrice { get; set; } = string.Empty;
     public string Subtotal { get; set; } = string.Empty;
