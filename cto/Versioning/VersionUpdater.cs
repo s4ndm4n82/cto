@@ -15,7 +15,7 @@ public class VersionUpdater
 		{
 			// Gets the working directory.
 			var appRootDirectory = Directory.GetCurrentDirectory().Split("\\bin")[0];
-			var assemblyInfoFilePath = Path.Combine(appRootDirectory, "SupportClasses", "AssemblyInfo.cs");
+			var assemblyInfoFilePath = Path.Combine(appRootDirectory, "Versioning", "AssemblyInfo.cs");
 			
 			if (!File.Exists(assemblyInfoFilePath)) return;
 

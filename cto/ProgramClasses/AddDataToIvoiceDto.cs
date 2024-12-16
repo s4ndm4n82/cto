@@ -183,11 +183,11 @@ public class AddDataToInvoiceDto
 					? invoiceData[currentRow, supplierContactNumberColumnIndex]?.Value?.ToString() ?? string.Empty
 					: string.Empty,
 				
-				MainTaxRate = taxRateColumnIndex > 0
+				TaxRate = taxRateColumnIndex > 0
 					? invoiceData[currentRow, taxRateColumnIndex]?.Value?.ToString() ?? string.Empty
 					: string.Empty,
 				
-				MainTaxType = taxTypeColumnIndex > 0
+				TaxType = taxTypeColumnIndex > 0
 					? invoiceData[currentRow, taxTypeColumnIndex]?.Value?.ToString() ?? string.Empty
 					: string.Empty,
 

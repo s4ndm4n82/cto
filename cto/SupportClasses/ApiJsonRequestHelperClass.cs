@@ -75,7 +75,7 @@ public class ApiJsonRequestHelperClass
 				if (!FieldNameMap.TryGetValue(field, out var propertyName)) continue;
 				var property = properties.FirstOrDefault(p => p.Name.Equals(propertyName, StringComparison.OrdinalIgnoreCase));
 
-				if (property == null)break;
+				if (property == null) continue;
 
 				var value = property.GetValue(invoiceDtoData)?.ToString();
 

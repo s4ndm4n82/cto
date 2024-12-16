@@ -6,9 +6,9 @@ public class JsonStringClass
     {
         public string Token { get; set; } = string.Empty;
         public string UserName { get; set; } = string.Empty;
+        public string ProjectId { get; set; } = string.Empty;
         public string TemplateKey { get; set; } = string.Empty;
         public string Queue { get; set; } = string.Empty;
-        public string ProjectId { get; set; } = string.Empty;
         public List<Fields> Fields { get; set; } = [];
         public List<Tables> Tables { get; set; } = [];
         public List<Files> Files { get; set; } = [];
