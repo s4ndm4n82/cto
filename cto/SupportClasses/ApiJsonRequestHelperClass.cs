@@ -17,6 +17,7 @@ public class ApiJsonRequestHelperClass
 		{ TpsFieldsList.CurrencyExchangeRate, HeaderNames.CurrencyExchangeRate },
 		{ TpsFieldsList.KFormType, HeaderNames.KFormType},
 		{ TpsFieldsList.KFormNumber, HeaderNames.KFormNumber },
+		{ TpsFieldsList.SupplierMsicCode, HeaderNames.SupplierMsic },
 		{ TpsFieldsList.SupplierIdentificationNumber, HeaderNames.SupplierIdNo },
 		{ TpsFieldsList.SupplierTin, HeaderNames.SupplierTin },
 		{ TpsFieldsList.SupplierName, HeaderNames.SupplierName },

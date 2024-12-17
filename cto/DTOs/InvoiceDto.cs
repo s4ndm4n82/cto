@@ -30,7 +30,7 @@ public class InvoiceDto
 	public string SupplierState { get; set; } = string.Empty;
 	public string SupplierCountry { get; set; } = string.Empty;
 	public string SupplierSst { get; set; } = string.Empty;
-	public string SupplierMsicCode { get; set; } = string.Empty;
+	public string SupplierMsic { get; set; } = string.Empty;
 	public string SupplierBusinessActivityDescription { get; set; } = string.Empty;
 	public string SupplierContactNumber { get; set; } = string.Empty;
 	public string TaxRate { get; set; } = string.Empty;

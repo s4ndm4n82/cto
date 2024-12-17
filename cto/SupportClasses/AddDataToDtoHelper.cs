@@ -30,7 +30,7 @@ public class AddDataToDtoHelper
                 { HeaderNames.BuyerState, columnIndex.GetValueOrDefault(ExcelHeaderNames.BuyerState, 0) },
                 { HeaderNames.BuyerCountry, columnIndex.GetValueOrDefault(ExcelHeaderNames.BuyerCountry, 0) },
                 { HeaderNames.BuyerSst, columnIndex.GetValueOrDefault(ExcelHeaderNames.BuyerSst, 0) },
-                { HeaderNames.BuyerMisc, columnIndex.GetValueOrDefault(ExcelHeaderNames.BuyerMisc, 0) },
+                { HeaderNames.BuyerMsic, columnIndex.GetValueOrDefault(ExcelHeaderNames.BuyerMisc, 0) },
                 {
                     HeaderNames.BuyerBusinessActivityDescription,
                     columnIndex.GetValueOrDefault(ExcelHeaderNames.BuyerBusinessActivityDescription, 0)
@@ -48,7 +48,7 @@ public class AddDataToDtoHelper
                 { HeaderNames.SupplierState, columnIndex.GetValueOrDefault(ExcelHeaderNames.SupplierState, 0) },
                 { HeaderNames.SupplierCountry, columnIndex.GetValueOrDefault(ExcelHeaderNames.SupplierCountry, 0) },
                 { HeaderNames.SupplierSst, columnIndex.GetValueOrDefault(ExcelHeaderNames.SupplierSst, 0) },
-                { HeaderNames.SupplierMisc, columnIndex.GetValueOrDefault(ExcelHeaderNames.SupplierMisc, 0) },
+                { HeaderNames.SupplierMsic, columnIndex.GetValueOrDefault(ExcelHeaderNames.SupplierMisc, 0) },
                 {
                     HeaderNames.SupplierBusinessActivityDescription,
                     columnIndex.GetValueOrDefault(ExcelHeaderNames.SupplierBusinessActivityDescription, 0)

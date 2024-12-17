@@ -31,7 +31,7 @@ public class AddDataToInvoiceDto
 			var buyerStateColumnIndex = columnIndexes[HeaderNames.BuyerState];
 			var buyerCountryColumnIndex = columnIndexes[HeaderNames.BuyerCountry];
 			var buyerSstColumnIndex = columnIndexes[HeaderNames.BuyerSst];
-			var buyerMiscColumnIndex = columnIndexes[HeaderNames.BuyerMisc];
+			var buyerMiscColumnIndex = columnIndexes[HeaderNames.BuyerMsic];
 			var buyerBusinessActivityDescriptionColumnIndex = columnIndexes[HeaderNames.BuyerBusinessActivityDescription];
 			var buyerContactNumberColumnIndex = columnIndexes[HeaderNames.BuyerContactNumber];
 			var supplierNameColumnIndex = columnIndexes[HeaderNames.SupplierName];
@@ -43,7 +43,7 @@ public class AddDataToInvoiceDto
 			var supplierStateColumnIndex = columnIndexes[HeaderNames.SupplierState];
 			var supplierCountryColumnIndex = columnIndexes[HeaderNames.SupplierCountry];
 			var supplierSstColumnIndex = columnIndexes[HeaderNames.SupplierSst];
-			var supplierMiscColumnIndex = columnIndexes[HeaderNames.SupplierMisc];
+			var supplierMiscColumnIndex = columnIndexes[HeaderNames.SupplierMsic];
 			var supplierBusinessActivityDescriptionColumnIndex =
 				columnIndexes[HeaderNames.SupplierBusinessActivityDescription];
 			var supplierContactNumberColumnIndex = columnIndexes[HeaderNames.SupplierContactNumber];
@@ -170,7 +170,7 @@ public class AddDataToInvoiceDto
 					? invoiceData[currentRow, supplierSstColumnIndex]?.Value?.ToString() ?? string.Empty
 					: string.Empty,
 
-				SupplierMsicCode = supplierMiscColumnIndex > 0
+				SupplierMsic = supplierMiscColumnIndex > 0
 					? invoiceData[currentRow, supplierMiscColumnIndex]?.Value?.ToString() ?? string.Empty
 					: string.Empty,
 

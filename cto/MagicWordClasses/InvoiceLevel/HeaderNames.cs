@@ -18,7 +18,7 @@ public static class HeaderNames
     public const string BuyerState = "BuyerState";
     public const string BuyerCountry = "BuyerCountry";
     public const string BuyerSst = "BuyerSst";
-    public const string BuyerMisc = "BuyerMisc";
+    public const string BuyerMsic = "BuyerMsic";
     public const string BuyerBusinessActivityDescription = "BuyerBusinessActivityDescription";
     public const string BuyerContactNumber = "BuyerContactNumber";
     public const string SupplierName = "SupplierName";
@@ -30,7 +30,7 @@ public static class HeaderNames
     public const string SupplierState = "SupplierState";
     public const string SupplierCountry = "SupplierCountry";
     public const string SupplierSst = "SupplierSst";
-    public const string SupplierMisc = "SupplierMisc";
+    public const string SupplierMsic = "SupplierMsic";
     public const string SupplierBusinessActivityDescription = "SupplierBusinessActivityDescription";
     public const string SupplierContactNumber = "SupplierContactNumber";
     public const string TaxRate = "TaxRate";

@@ -7,6 +7,7 @@ public class TpsFieldsList
     public const string CurrencyExchangeRate = "Currency Exchange Rate";
     public const string KFormType = "K Form Type";
     public const string KFormNumber = "K Form Number";
+    public const string SupplierMsicCode = "Supplier MSIC Code";
     public const string SupplierIdentificationNumber = "Supplier Identification Number";
     public const string SupplierTin = "Supplier TIN";
     public const string SupplierName = "Supplier Name";
