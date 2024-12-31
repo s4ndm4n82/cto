@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "G:\\Users\\S4NDM4N\\Development\\Repos\\cto\\cto\\cto.csproj": {}
+    "F:\\Users\\S4NDM4N\\Development\\cto\\cto\\cto.csproj": {}
   },
   "projects": {
-    "G:\\Users\\S4NDM4N\\Development\\Repos\\cto\\cto\\cto.csproj": {
+    "F:\\Users\\S4NDM4N\\Development\\cto\\cto\\cto.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "G:\\Users\\S4NDM4N\\Development\\Repos\\cto\\cto\\cto.csproj",
+        "projectUniqueName": "F:\\Users\\S4NDM4N\\Development\\cto\\cto\\cto.csproj",
         "projectName": "cto",
-        "projectPath": "G:\\Users\\S4NDM4N\\Development\\Repos\\cto\\cto\\cto.csproj",
-        "packagesPath": "G:\\Users\\S4NDM4N\\.nuget\\packages\\",
-        "outputPath": "G:\\Users\\S4NDM4N\\Development\\Repos\\cto\\cto\\obj\\",
+        "projectPath": "F:\\Users\\S4NDM4N\\Development\\cto\\cto\\cto.csproj",
+        "packagesPath": "F:\\Users\\S4NDM4N\\.nuget\\packages\\",
+        "outputPath": "F:\\Users\\S4NDM4N\\Development\\cto\\cto\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "D:\\Microsoft Visual Studio\\2022\\Shared\\NuGetPackages"
+          "D:\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "G:\\Users\\S4NDM4N\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "F:\\Users\\S4NDM4N\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
