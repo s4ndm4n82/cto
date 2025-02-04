@@ -11,14 +11,23 @@ public class CreateApiJsonRequest
 {
     public static bool MakeJsonRequest(InvoiceDto invoiceDtoData)
     {
-        var settings = ReadSettings.ReadAppSettings();
+        var settings = ReadSettings.ReadAppSettings().Item1;
         var fileList = ApiJsonRequestHelperClass.CreateFilesList(invoiceDtoData);
         var fieldsList = ApiJsonRequestHelperClass.CreateFieldsList(invoiceDtoData);
         var lineFieldList = ApiJsonRequestHelperClass.CreateLineFieldsList(invoiceDtoData);
         try
         {
+            if (settings == null)
+            {
+                Console.WriteLine("AppSettings is empty ...");
+                Console.WriteLine("Press any key to exit ...");
+                Console.Read();
+                Environment.Exit(0);
+            }
+            
             JsonStringClass.JsonClassRoot jsonRequest = new()
             {
+                
                 Token = settings.AppConfigs.ProjectSettings.ImportToken,
                 UserName = settings.AppConfigs.ProjectSettings.ImportUser,
                 ProjectId = settings.AppConfigs.ProjectSettings.ImportProjectId,
@@ -31,10 +40,9 @@ public class CreateApiJsonRequest
 
             var jsonRequestString = JsonConvert.SerializeObject(jsonRequest, Formatting.Indented);
 
-            return SendToTps.SendToTpsFn(jsonRequestString, invoiceDtoData.EInvoiceNumber);
+            return SendToTps.SendToTpsFn(jsonRequestString, invoiceDtoData.EInvoiceNumber, invoiceDtoData.FileName);
         }
         catch (Exception ex)
-
         {
             Console.WriteLine(ex.Message);
             return false;

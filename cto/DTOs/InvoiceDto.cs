@@ -2,6 +2,7 @@
 
 public class InvoiceDto
 {
+	public string FileName { get; set; } = string.Empty;
 	public string LineId { get; set; } = string.Empty;
 	public string EInvoiceNumber { get; set; } = string.Empty;
 	public string Classification { get; set; } = string.Empty;

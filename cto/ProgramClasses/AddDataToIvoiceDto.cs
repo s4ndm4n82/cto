@@ -9,6 +9,7 @@ public class AddDataToInvoiceDto
 {
 	public static InvoiceDto AddDataToInvoiceDtoFn(ExcelRange invoiceData,
 		int currentRow,
+		string excelFileName,
 		Dictionary<string, int> columnIndex)
 	{
 		try
@@ -58,6 +59,8 @@ public class AddDataToInvoiceDto
 
 			var invoiceDto = new InvoiceDto
 			{
+				FileName = excelFileName,
+				
 				LineId = lineIdColumnIndex > 0
 					? invoiceData[currentRow, lineIdColumnIndex].Value?.ToString() ?? string.Empty
 					: string.Empty,

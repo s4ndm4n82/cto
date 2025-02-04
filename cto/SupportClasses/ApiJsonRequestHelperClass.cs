@@ -62,7 +62,16 @@ public class ApiJsonRequestHelperClass
 
 	public static List<JsonStringClass.Fields> CreateFieldsList(InvoiceDto invoiceDtoData)
 	{
-		var settings = ReadSettings.ReadAppSettings();
+		var settings = ReadSettings.ReadAppSettings().Item1;
+		
+		if (settings == null)
+		{
+			Console.WriteLine("AppSettings is empty ...");
+			Console.WriteLine("Press any key to exit ...");
+			Console.Read();
+			Environment.Exit(0);
+		}
+		
 		var fields = settings.AppConfigs.FieldSettings.MainFieldsList;
 
 		var fieldsList = new List<JsonStringClass.Fields>();
@@ -96,7 +105,16 @@ public class ApiJsonRequestHelperClass
 
 	public static List<JsonStringClass.Tables> CreateLineFieldsList(InvoiceDto invoiceDtoData)
 	{
-		var settings = ReadSettings.ReadAppSettings();
+		var settings = ReadSettings.ReadAppSettings().Item1;
+		
+		if (settings == null)
+		{
+			Console.WriteLine("AppSettings is empty ...");
+			Console.WriteLine("Press any key to exit ...");
+			Console.Read();
+			Environment.Exit(0);
+		}
+		
 		var lineFields = settings.AppConfigs.FieldSettings.LineItemsFieldsList;
 		var lineDefaultValue = settings.AppConfigs.FieldSettings.LineDefaultValues;
 		var tables = new List<JsonStringClass.Tables>();
@@ -150,12 +168,23 @@ public class ApiJsonRequestHelperClass
 
 	public static List<JsonStringClass.Files> CreateFilesList(InvoiceDto invoiceDtoData)
 	{
-		var settings = ReadSettings.ReadAppSettings();
+		var settings = ReadSettings.ReadAppSettings().Item1;
+		
+		if (settings == null)
+		{
+			Console.WriteLine("AppSettings is empty ...");
+			Console.WriteLine("Press any key to exit ...");
+			Console.Read();
+			Environment.Exit(0);
+		}
+		
 		var base64 = settings.AppConfigs.FileSettings.DummyBase64;
 		var number = invoiceDtoData.EInvoiceNumber;
+		var (docType, clientName) = GetClientNameAndDocType(invoiceDtoData.FileName);
+
 		try
 		{
-			var fileName = $"DummyInvoice_{number}.pdf";
+			var fileName = $"{clientName}_{docType}_{number}.pdf";
 			var files = new List<JsonStringClass.Files>();
 			{
 				files.Add(new JsonStringClass.Files() { Name = fileName, Data = base64 });
@@ -168,5 +197,11 @@ public class ApiJsonRequestHelperClass
 			Console.WriteLine(ex.Message);
 			throw;
 		}
+	}
+
+	public static (string, string) GetClientNameAndDocType(string excelFileName)
+	{
+		var parts = excelFileName.Split('_');
+		return parts.Length > 2 ? (parts[1].ToUpper(), parts[2].ToUpper()) : (string.Empty, string.Empty);
 	}
 }

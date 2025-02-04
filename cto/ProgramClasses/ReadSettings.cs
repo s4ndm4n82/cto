@@ -1,4 +1,5 @@
 ﻿using cto.Classes;
+using cto.SupportClasses;
 using Microsoft.Extensions.Configuration;
 
 namespace cto.ProgramClasses;
@@ -9,15 +10,20 @@ public class ReadSettings
         .Combine(
             Directory.GetCurrentDirectory(), "ConfigFiles"
         );
-
-    public static AppSettingsClass ReadAppSettings()
+    
+    private static readonly string DataFilePath = Path
+        .Combine(
+            Directory.GetCurrentDirectory(), "HoldFolder", "Input"
+        );
+    
+    public static (AppSettingsClass?, string) ReadAppSettings()
     {
         try
         {
-            var configBuilder = ReadConfigs("appsettings.json").Get<AppSettingsClass>();
+            var configFile = FileFunctions.GetMatchingConfigFile(ConfigFilePath, DataFilePath);
+            var configBuilder = ReadConfigs(configFile.Item1).Get<AppSettingsClass>();
 
-            return configBuilder ??
-            throw new InvalidOperationException("AppSettings not found in configuration");
+            return (configBuilder, configFile.Item2);
         }
         catch (Exception ex)
         {
