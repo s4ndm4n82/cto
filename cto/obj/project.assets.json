@@ -1055,24 +1055,31 @@
     ]
   },
   "packageFolders": {
-    "/home/s4ndm4n/.nuget/packages/": {}
+    "F:\\Users\\S4NDM4N\\.nuget\\packages\\": {},
+    "D:\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/s4ndm4n/Development/cto/cto/cto.csproj",
+      "projectUniqueName": "F:\\Users\\S4NDM4N\\Development\\cto\\cto\\cto.csproj",
       "projectName": "cto",
-      "projectPath": "/home/s4ndm4n/Development/cto/cto/cto.csproj",
-      "packagesPath": "/home/s4ndm4n/.nuget/packages/",
-      "outputPath": "/home/s4ndm4n/Development/cto/cto/obj/",
+      "projectPath": "F:\\Users\\S4NDM4N\\Development\\cto\\cto\\cto.csproj",
+      "packagesPath": "F:\\Users\\S4NDM4N\\.nuget\\packages\\",
+      "outputPath": "F:\\Users\\S4NDM4N\\Development\\cto\\cto\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "D:\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
       "configFilePaths": [
-        "/home/s4ndm4n/.nuget/NuGet/NuGet.Config"
+        "F:\\Users\\S4NDM4N\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net9.0"
       ],
       "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -1144,7 +1151,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/9.0.102/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.102/PortableRuntimeIdentifierGraph.json"
       }
     }
   }
