@@ -14,14 +14,11 @@ public sealed class FolderPaths
 		public const string HoldFolder = "HoldFolder";
 	}
 
-	private static readonly FolderPaths _instances = new();
+	private static readonly FolderPaths Instances = new();
 
 	private FolderPaths() { }
 
-	public static FolderPaths Instance
-	{
-		get { return _instances; }
-	}
+	public static FolderPaths Instance => Instances;
 
 	// Folder name elements
 	public string ConfigFolderName { get; private set; } = string.Empty;
