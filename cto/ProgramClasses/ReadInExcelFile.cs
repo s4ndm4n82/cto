@@ -11,9 +11,8 @@ public class ReadInExcelFile
 		try
 		{
 			FolderPaths.Instance.InitializePaths();
-			var results = ReadSettings.ReadAppSettings();
-			var settings = results.Item1;
-			
+			var (settings, inputFileName) = ReadSettings.ReadAppSettings();
+
 			if (settings == null)
 			{
 				Console.WriteLine("AppSettings is empty ...");
@@ -28,7 +27,6 @@ public class ReadInExcelFile
 			var invoiceWsName = settings.AppConfigs.FileSettings.MainFieldWorksheet;
 			var lineItemsWsName = settings.AppConfigs.FileSettings.LineItemsFieldWorksheet;
 
-			var inputFileName = results.Item2;
 			var inputFilePath = Path.Combine(FolderPaths.Instance.InputFolderPath, inputFileName);
 
 			if (string.IsNullOrEmpty(inputFilePath))

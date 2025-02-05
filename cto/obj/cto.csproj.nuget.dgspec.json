@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "F:\\Users\\S4NDM4N\\Development\\cto\\cto\\cto.csproj": {}
+    "G:\\Users\\S4NDM4N\\Development\\Repos\\cto\\cto\\cto.csproj": {}
   },
   "projects": {
-    "F:\\Users\\S4NDM4N\\Development\\cto\\cto\\cto.csproj": {
+    "G:\\Users\\S4NDM4N\\Development\\Repos\\cto\\cto\\cto.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "F:\\Users\\S4NDM4N\\Development\\cto\\cto\\cto.csproj",
+        "projectUniqueName": "G:\\Users\\S4NDM4N\\Development\\Repos\\cto\\cto\\cto.csproj",
         "projectName": "cto",
-        "projectPath": "F:\\Users\\S4NDM4N\\Development\\cto\\cto\\cto.csproj",
-        "packagesPath": "F:\\Users\\S4NDM4N\\.nuget\\packages\\",
-        "outputPath": "F:\\Users\\S4NDM4N\\Development\\cto\\cto\\obj\\",
+        "projectPath": "G:\\Users\\S4NDM4N\\Development\\Repos\\cto\\cto\\cto.csproj",
+        "packagesPath": "G:\\Users\\S4NDM4N\\.nuget\\packages\\",
+        "outputPath": "G:\\Users\\S4NDM4N\\Development\\Repos\\cto\\cto\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "D:\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+          "D:\\Microsoft Visual Studio\\2022\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "F:\\Users\\S4NDM4N\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "G:\\Users\\S4NDM4N\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -52,19 +52,19 @@
           "dependencies": {
             "EPPlus": {
               "target": "Package",
-              "version": "[7.5.1, )"
+              "version": "[7.5.3, )"
             },
             "Microsoft.Extensions.Configuration": {
               "target": "Package",
-              "version": "[9.0.0, )"
+              "version": "[9.0.1, )"
             },
             "Microsoft.Extensions.Configuration.Binder": {
               "target": "Package",
-              "version": "[9.0.0, )"
+              "version": "[9.0.1, )"
             },
             "Microsoft.Extensions.Configuration.Json": {
               "target": "Package",
-              "version": "[9.0.0, )"
+              "version": "[9.0.1, )"
             },
             "Microsoft.VisualStudio.SlowCheetah": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
@@ -79,6 +79,14 @@
             "RestSharp": {
               "target": "Package",
               "version": "[112.1.0, )"
+            },
+            "itext7": {
+              "target": "Package",
+              "version": "[9.0.0, )"
+            },
+            "itext7.bouncy-castle-adapter": {
+              "target": "Package",
+              "version": "[9.0.0, )"
             }
           },
           "imports": [

@@ -167,20 +167,10 @@ public class ApiJsonRequestHelperClass
 	}
 
 	public static List<JsonStringClass.Files> CreateFilesList(InvoiceDto invoiceDtoData)
-	{
-		var settings = ReadSettings.ReadAppSettings().Item1;
-		
-		if (settings == null)
-		{
-			Console.WriteLine("AppSettings is empty ...");
-			Console.WriteLine("Press any key to exit ...");
-			Console.Read();
-			Environment.Exit(0);
-		}
-		
-		var base64 = settings.AppConfigs.FileSettings.DummyBase64;
+	{	
 		var number = invoiceDtoData.EInvoiceNumber;
 		var (docType, clientName) = GetClientNameAndDocType(invoiceDtoData.FileName);
+		var base64 = CreatePdf.CreatDummyPdfFile(clientName, docType);
 
 		try
 		{
