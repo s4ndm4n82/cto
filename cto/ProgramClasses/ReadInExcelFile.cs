@@ -1,5 +1,6 @@
 ﻿using cto.SupportClasses;
 using OfficeOpenXml;
+using Serilog;
 using LicenseContext = OfficeOpenXml.LicenseContext;
 
 namespace cto.ProgramClasses;
@@ -10,35 +11,38 @@ public class ReadInExcelFile
 	{
 		try
 		{
+			// Initialize the folder paths
 			FolderPaths.Instance.InitializePaths();
+			// Read the app settings
 			var (settings, inputFileName) = ReadSettings.ReadAppSettings();
 
 			if (settings == null)
 			{
-				Console.WriteLine("AppSettings is empty ...");
-				Console.WriteLine("Press any key to exit ...");
-				Console.Read();
+				Log.Error("AppSettings is empty ....");
 				Environment.Exit(0);
 			}
 			
+			// Loading config data from the app settings
 			var matchingColumn = settings.AppConfigs.FileSettings.MatchColumn;
 			var mainColumnHeaders = settings.AppConfigs.FieldSettings.MainFieldHeaders;
 			var lineColumnHeaders = settings.AppConfigs.FieldSettings.LineItemHeaders;
 			var invoiceWsName = settings.AppConfigs.FileSettings.MainFieldWorksheet;
 			var lineItemsWsName = settings.AppConfigs.FileSettings.LineItemsFieldWorksheet;
-
 			var inputFilePath = Path.Combine(FolderPaths.Instance.InputFolderPath, inputFileName);
 
 			if (string.IsNullOrEmpty(inputFilePath))
 			{
-				Console.WriteLine("Input folder is empty ...");
-				Console.WriteLine("Press any key to exit ...");
+				Console.WriteLine("Input folder is empty ....");
+				Console.WriteLine("Press any key to exit ....");
 				Console.Read();
 				Environment.Exit(0);
 			}
 			
+			// Set the license context
 			ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
 			
+			// Read the Excel file
+			Log.Information("Reading the Excel file ...");
 			using var excelFileData = new ExcelPackage(new FileInfo(inputFilePath));
 			var fieldValues = excelFileData.Workbook.Worksheets[invoiceWsName];
 			var lineValues = excelFileData.Workbook.Worksheets[lineItemsWsName];
@@ -55,7 +59,67 @@ public class ReadInExcelFile
 		}
 		catch (Exception ex)
 		{
-			Console.WriteLine(ex.Message);
+			Log.Error(ex, "Error reading the Excel file ....");
+			throw;
+		}
+	}
+	
+	private static void CreateDto(ExcelWorksheet invoice,
+		ExcelWorksheet line,
+		Dictionary<string, int> columnIndexes,
+		Dictionary<string, int> lineItemColumnIndex,
+		int matchingColumnIndex,
+		string excelFileName)
+	{
+		try
+		{
+			Log.Information("Creating the DTO ....");
+			// Looping through the invoice level worksheet
+			for (var row = 2; row <= invoice.Dimension.End.Row; row++)
+			{
+				var invoiceLevelRow = invoice
+					.Cells[
+						row, 1, row, invoice.Dimension.End.Column
+					];
+
+				var cell = invoiceLevelRow[row, matchingColumnIndex];
+
+				if (cell?.Value == null
+				    || string.IsNullOrEmpty(cell.Value.ToString()))
+				{
+					break;
+				}
+
+				var matchingInvoiceNumber = cell.Value.ToString();
+
+				var matchingRows = line.Cells
+					.Where(
+						x => x is { Value: not null }
+						     && x.Value.ToString() == matchingInvoiceNumber
+					)
+					.Select(y => y.Start.Row)
+					.ToList();
+
+				// Adding data to invoice DTO
+				var invoiceDataDto = AddDataToInvoiceDto
+					.AddDataToInvoiceDtoFn(invoiceLevelRow, row, excelFileName, columnIndexes);
+
+				// Adding data to line items DTO
+				var lineItemsDto = matchingRows
+					.Select(rowValue => AddDataToLineItemsDto.AddDataToLineItemsDtoFn
+					(invoiceDataDto,
+						line.Cells[rowValue, 1, rowValue, line.Dimension.End.Column],
+						rowValue,
+						lineItemColumnIndex))
+					.ToList();
+
+				invoiceDataDto.LineItems.AddRange(lineItemsDto);
+				CreateApiJsonRequest.MakeJsonRequest(invoiceDataDto);
+			}
+		}
+		catch (Exception ex)
+		{
+			Log.Error(ex, "Error creating the DTO ....");
 			throw;
 		}
 	}
@@ -77,7 +141,7 @@ public class ReadInExcelFile
 		}
 		catch (Exception ex)
 		{
-			Console.WriteLine(ex.Message);
+			Log.Error(ex, "Error getting the matching column index ....");
 			throw;
 		}
 	}
@@ -103,63 +167,7 @@ public class ReadInExcelFile
 		}
 		catch (Exception ex)
 		{
-			Console.WriteLine(ex.Message);
-			throw;
-		}
-	}
-
-	private static void CreateDto(ExcelWorksheet invoice,
-	 ExcelWorksheet line,
-	 Dictionary<string, int> columnIndexes,
-	 Dictionary<string, int> lineItemColumnIndex,
-	 int matchingColumnIndex,
-	 string excelFileName)
-	{
-		try
-		{
-			// Looping through the invoice level worksheet
-			for (var row = 2; row <= invoice.Dimension.End.Row; row++)
-			{
-				var invoiceLevelRow = invoice
-				.Cells[
-					row, 1, row, invoice.Dimension.End.Column
-					];
-
-				var cell = invoiceLevelRow[row, matchingColumnIndex];
-
-				if (cell?.Value == null
-				    || string.IsNullOrEmpty(cell.Value.ToString()))
-				{
-					break;
-				}
-
-				var matchingInvoiceNumber = cell.Value.ToString();
-
-				var matchingRows = line.Cells
-				.Where(
-					x => x is { Value: not null }
-					        && x.Value.ToString() == matchingInvoiceNumber
-					)
-				.Select(y => y.Start.Row)
-				.ToList();
-
-				var invoiceDataDto = AddDataToInvoiceDto.AddDataToInvoiceDtoFn(invoiceLevelRow, row, excelFileName, columnIndexes);
-
-				var lineItemsDto = matchingRows
-				.Select(rowValue => AddDataToLineItemsDto.AddDataToLineItemsDtoFn
-				(invoiceDataDto,
-					line.Cells[rowValue, 1, rowValue, line.Dimension.End.Column],
-					rowValue,
-					lineItemColumnIndex))
-				.ToList();
-
-				invoiceDataDto.LineItems.AddRange(lineItemsDto);
-				CreateApiJsonRequest.MakeJsonRequest(invoiceDataDto);
-			}
-		}
-		catch (Exception ex)
-		{
-			Console.WriteLine(ex.Message);
+			Log.Error(ex, "Error getting the column indexes ....");
 			throw;
 		}
 	}

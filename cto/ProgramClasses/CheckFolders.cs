@@ -1,4 +1,5 @@
 ﻿using cto.SupportClasses;
+using Serilog;
 
 namespace cto.ProgramClasses;
 
@@ -6,40 +7,74 @@ public class CheckFolders
 {
     public static bool StartCheckFolders()
     {
-        var loopCount = 0;
-        FolderPaths.Instance.InitializePaths();
-
-        var inputFolderName = FolderPaths.Instance.InputFolderName;
-        var outputFolderName = FolderPaths.Instance.OutputFolderName;
-        var holdFolderPath = FolderPaths.Instance.HoldFolderPath;
-
-        if (!Directory.Exists(holdFolderPath))
+        try
         {
-            Directory.CreateDirectory(holdFolderPath);
-        }
+            Log.Information("Checking Folders ....");
+            var mainLoopCount = 0;
+            var subLoopCount = 0;
+            FolderPaths.Instance.InitializePaths();
 
-        var constDirectoryList = new[]
-        {
-            inputFolderName,
-            outputFolderName
-        };
+            var logFolderPath = FolderPaths.Instance.LogFolderPath;
+            var configFolderPath = FolderPaths.Instance.ConfigFolderPath;
+            var holdFolderPath = FolderPaths.Instance.HoldFolderPath;
+            var inputFolderName = FolderPaths.Instance.InputFolderName;
+            var outputFolderName = FolderPaths.Instance.OutputFolderName;
 
-
-        foreach (var constDirectory in constDirectoryList)
-        {
-            loopCount++;
-            var constDirectoryPath = Path.Combine(holdFolderPath, constDirectory);
-            if (!Directory.Exists(constDirectoryPath))
+            if (!Directory.Exists(holdFolderPath))
             {
-                Directory.CreateDirectory(constDirectoryPath);
+                Directory.CreateDirectory(holdFolderPath);
             }
-        }
+            var mainDirectoryList = new[]
+            {
+                logFolderPath,
+                configFolderPath,
+                holdFolderPath
+            };
+            
+            foreach (var mainDirectory in mainDirectoryList)
+            {
+                mainLoopCount++;
+                if (!Directory.Exists(mainDirectory))
+                {
+                    Directory.CreateDirectory(mainDirectory);
+                }
+            }
+            
+            if (mainDirectoryList.Length != mainLoopCount)
+            {
+                Log.Information("Main Folder Check Failed ....");
+                return false;
+            }
+            
+            var subDirectoryList = new[]
+            {
+                inputFolderName,
+                outputFolderName
+            };
 
-        if (constDirectoryList.Length == loopCount)
+            foreach (var constDirectory in subDirectoryList)
+            {
+                subLoopCount++;
+                var constDirectoryPath = Path.Combine(holdFolderPath, constDirectory);
+                if (!Directory.Exists(constDirectoryPath))
+                {
+                    Directory.CreateDirectory(constDirectoryPath);
+                }
+            }
+
+            if (subDirectoryList.Length == subLoopCount)
+            {
+                Log.Information("Folder Check Completed Successfully ....");
+                return true;
+            }
+            
+            Log.Information("Folder Check Failed ....");
+            return false;
+        }
+        catch (Exception ex)
         {
-            return true;
+            Log.Error(ex, "CheckFolders.StartCheckFolders() Failed");
+            return false;
         }
-
-        return false;
     }
 }

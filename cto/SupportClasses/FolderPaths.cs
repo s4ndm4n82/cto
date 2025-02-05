@@ -1,4 +1,5 @@
 ﻿using cto.ProgramClasses;
+using Serilog;
 
 namespace cto.SupportClasses;
 
@@ -8,28 +9,29 @@ public sealed class FolderPaths
 	{
 		// Default folder names
 		public const string ConfigFolder = "ConfigFiles";
+		public const string LogFolder = "Logs";
 		public const string InputFolder = "Input";
 		public const string OutputFolder = "Output";
 		public const string BackUpFolder = "Backup";
 		public const string HoldFolder = "HoldFolder";
 	}
 
-	private static readonly FolderPaths Instances = new();
-
 	private FolderPaths() { }
 
-	public static FolderPaths Instance => Instances;
+	public static FolderPaths Instance { get; } = new();
 
 	// Folder name elements
-	public string ConfigFolderName { get; private set; } = string.Empty;
+	private string ConfigFolderName { get; set; } = string.Empty;
+	private string LogFolderName { get; set; } = string.Empty;
 	public string InputFolderName { get; private set; } = string.Empty;
 	public string OutputFolderName { get; private set; } = string.Empty;
 	public string BackUpFolderName { get; set; } = string.Empty;
-	public string HoldFolderName { get; private set; } = string.Empty;
+	private string HoldFolderName { get; set; } = string.Empty;
 
 	// Folder path elements
-	public string WorkingDirectory { get; private set; } = string.Empty;
+	private string WorkingDirectory { get; set; } = string.Empty;
 	public string ConfigFolderPath { get; private set; } = string.Empty;
+	public string LogFolderPath { get; private set; } = string.Empty;
 	public string InputFolderPath { get; private set; } = string.Empty;
 	public string OutputFolderPath { get; private set; } = string.Empty;
 	public string BackUpFolderPath { get; set; } = string.Empty;
@@ -41,46 +43,30 @@ public sealed class FolderPaths
 		
 		if (settings == null)
 		{
-			Console.WriteLine("AppSettings is empty ...");
-			Console.WriteLine("Press any key to exit ...");
-			Console.Read();
+			Log.Error("AppSettings is empty ...");
 			Environment.Exit(0);
 		}
 
 		try
 		{
-			InputFolderName = !string.IsNullOrEmpty(
-				settings.AppConfigs.FolderDeliverSettings.InputFolderName
-			)
-				? settings.AppConfigs.FolderDeliverSettings.InputFolderName
-				: FolderNames.InputFolder;
+			ConfigFolderName = FolderNames.ConfigFolder;
+			
+			LogFolderName = FolderNames.LogFolder;
+			
+			InputFolderName = FolderNames.InputFolder;
 
-			OutputFolderName = !string.IsNullOrEmpty(
-				settings.AppConfigs.FolderDeliverSettings.OutputFolderName
-			)
-				? settings.AppConfigs.FolderDeliverSettings.OutputFolderName
-				: FolderNames.OutputFolder;
+			OutputFolderName = FolderNames.OutputFolder;
 
-			BackUpFolderName = !string.IsNullOrEmpty(
-				settings.AppConfigs.FolderDeliverSettings.BackUpFolderName
-			)
-				? settings.AppConfigs.FolderDeliverSettings.BackUpFolderName
-				: FolderNames.BackUpFolder;
+			BackUpFolderName = FolderNames.BackUpFolder;
 
-			HoldFolderName = !string.IsNullOrEmpty(
-				settings.AppConfigs.FolderDeliverSettings.FileHoldFolder
-			)
-				? settings.AppConfigs.FolderDeliverSettings.FileHoldFolder
-				: FolderNames.HoldFolder;
+			HoldFolderName = FolderNames.HoldFolder;
 
 			// Directory paths
-			WorkingDirectory = !string.IsNullOrEmpty(
-				settings.AppConfigs.FolderDeliverSettings.BaseFolderPath
-			)
-				? settings.AppConfigs.FolderDeliverSettings.BaseFolderPath
-				: Directory.GetCurrentDirectory();
+			WorkingDirectory = Directory.GetCurrentDirectory();
 		
-			ConfigFolderPath = Path.Combine(WorkingDirectory, ConfigFolderName);			
+			ConfigFolderPath = Path.Combine(WorkingDirectory, ConfigFolderName);
+			
+			LogFolderPath = Path.Combine(WorkingDirectory, LogFolderName);
 		
 			HoldFolderPath = Path.Combine(WorkingDirectory, HoldFolderName);
 			

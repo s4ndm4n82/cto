@@ -3,6 +3,7 @@ using cto.Classes;
 using cto.DTOs;
 using cto.SupportClasses;
 using Newtonsoft.Json;
+using Serilog;
 using Formatting = Newtonsoft.Json.Formatting;
 
 namespace cto.ProgramClasses;
@@ -17,11 +18,11 @@ public class CreateApiJsonRequest
         var lineFieldList = ApiJsonRequestHelperClass.CreateLineFieldsList(invoiceDtoData);
         try
         {
+            Log.Information("Creating the Json Request ....");
+            
             if (settings == null)
             {
-                Console.WriteLine("AppSettings is empty ...");
-                Console.WriteLine("Press any key to exit ...");
-                Console.Read();
+                Log.Error("AppSettings is empty ....");
                 Environment.Exit(0);
             }
             
@@ -44,7 +45,7 @@ public class CreateApiJsonRequest
         }
         catch (Exception ex)
         {
-            Console.WriteLine(ex.Message);
+            Log.Error(ex, "Error creating the Json Request ....");
             return false;
         }
     }

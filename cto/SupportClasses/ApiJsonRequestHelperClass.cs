@@ -5,6 +5,7 @@ using cto.MagicWordClasses.InvoiceLevel;
 using cto.MagicWordClasses.LineItemLevel;
 using cto.MagicWordClasses.TpsFields;
 using cto.ProgramClasses;
+using Serilog;
 
 namespace cto.SupportClasses;
 
@@ -66,9 +67,7 @@ public class ApiJsonRequestHelperClass
 		
 		if (settings == null)
 		{
-			Console.WriteLine("AppSettings is empty ...");
-			Console.WriteLine("Press any key to exit ...");
-			Console.Read();
+			Log.Error("AppSettings is empty ...");
 			Environment.Exit(0);
 		}
 		
@@ -109,14 +108,11 @@ public class ApiJsonRequestHelperClass
 		
 		if (settings == null)
 		{
-			Console.WriteLine("AppSettings is empty ...");
-			Console.WriteLine("Press any key to exit ...");
-			Console.Read();
+			Log.Error("AppSettings is empty ...");
 			Environment.Exit(0);
 		}
 		
 		var lineFields = settings.AppConfigs.FieldSettings.LineItemsFieldsList;
-		var lineDefaultValue = settings.AppConfigs.FieldSettings.LineDefaultValues;
 		var tables = new List<JsonStringClass.Tables>();
 		var table = new JsonStringClass.Tables();
 
@@ -131,7 +127,7 @@ public class ApiJsonRequestHelperClass
 
 				foreach (var lineField in lineFields)
 				{
-					string? value;
+					var value = string.Empty;
 					
 					if (LineFieldNameMap.TryGetValue(lineField, out var propertyName))
 					{
@@ -141,15 +137,12 @@ public class ApiJsonRequestHelperClass
 						
 						value = property.GetValue(lineItem)?.ToString();
 					}
-					else
-					{
-						value = lineDefaultValue
-						.Where(x => x.FieldName.Equals(lineField, StringComparison.OrdinalIgnoreCase))
-						.Select(y => y.FieldValue)
-						.FirstOrDefault();
-					}
 
-					if (string.IsNullOrEmpty(value)) break;
+					if (string.IsNullOrEmpty(value))
+					{
+						Log.Warning("Line field value is empty ....");
+						break;
+					}
 
 					row.Fields.Add(new JsonStringClass.LineFields { Name = lineField, Value = value });
 				}

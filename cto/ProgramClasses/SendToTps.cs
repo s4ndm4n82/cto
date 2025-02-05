@@ -1,6 +1,7 @@
 ﻿using System.Net;
 using cto.SupportClasses;
 using RestSharp;
+using Serilog;
 
 namespace cto.ProgramClasses;
 
@@ -12,13 +13,14 @@ public class SendToTps
         {
             var settings = ReadSettings.ReadAppSettings().Item1;
             var (docType, clientName) = ApiJsonRequestHelperClass.GetClientNameAndDocType(fileName);
+            
             if (settings == null)
             {
-                Console.WriteLine("AppSettings is empty ...");
-                Console.WriteLine("Press any key to exit ...");
-                Console.Read();
+                Log.Error("AppSettings is empty ....");
                 Environment.Exit(0);
             }
+            
+            Log.Information($"Sending {clientName}_{docType}_{invoiceNumber}.pdf to TPS ....");
             
             var apiUrl = settings.AppConfigs.UploadSettings.UploadDomain;
             var lastIndex = apiUrl.LastIndexOf('/');
@@ -36,15 +38,15 @@ public class SendToTps
 
             if (response.StatusCode != HttpStatusCode.OK)
             {
-                Console.WriteLine($"Server Error: {response.StatusCode} - {response.Content}");
+                Log.Error($"Server Error: {response.StatusCode} - {response.Content} ....");
                 return false;
             }
-            Console.WriteLine($"{clientName}_{docType}_{invoiceNumber}.pdf uploaded successfully.");
+            Log.Information($"{clientName}_{docType}_{invoiceNumber}.pdf uploaded successfully.");
             return true;
         }
         catch (Exception ex)
         {
-            Console.WriteLine(ex.Message);
+            Log.Error(ex, "Error sending to TPS ....");
             throw;
         }
     }
