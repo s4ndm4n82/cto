@@ -1,4 +1,5 @@
 ﻿using System.Net;
+using cto.Classes;
 using cto.SupportClasses;
 using RestSharp;
 using Serilog;
@@ -11,7 +12,7 @@ public class SendToTps
     {
         try
         {
-            var settings = ReadSettings.ReadAppSettings().Item1;
+            var settings = GlobalAppSettings.Instance.Settings;
             var (docType, clientName) = ApiJsonRequestHelperClass.GetClientNameAndDocType(fileName);
             
             if (settings == null)

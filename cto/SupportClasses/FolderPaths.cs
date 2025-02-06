@@ -1,4 +1,5 @@
-﻿using cto.ProgramClasses;
+﻿using cto.Classes;
+using cto.ProgramClasses;
 using Serilog;
 
 namespace cto.SupportClasses;
@@ -12,6 +13,7 @@ public sealed class FolderPaths
 		public const string LogFolder = "Logs";
 		public const string InputFolder = "Input";
 		public const string OutputFolder = "Output";
+		public const string DownloadFolder = "Download";
 		public const string BackUpFolder = "Backup";
 		public const string HoldFolder = "HoldFolder";
 	}
@@ -25,6 +27,7 @@ public sealed class FolderPaths
 	private string LogFolderName { get; set; } = string.Empty;
 	public string InputFolderName { get; private set; } = string.Empty;
 	public string OutputFolderName { get; private set; } = string.Empty;
+	public string DownloadFolderName { get; private set; } = string.Empty;
 	public string BackUpFolderName { get; set; } = string.Empty;
 	private string HoldFolderName { get; set; } = string.Empty;
 
@@ -34,19 +37,12 @@ public sealed class FolderPaths
 	public string LogFolderPath { get; private set; } = string.Empty;
 	public string InputFolderPath { get; private set; } = string.Empty;
 	public string OutputFolderPath { get; private set; } = string.Empty;
+	public string DownloadFolderPath { get; private set; } = string.Empty;
 	public string BackUpFolderPath { get; set; } = string.Empty;
 	public string HoldFolderPath { get; private set; } = string.Empty;
 
 	public void InitializePaths()
 	{
-		var settings = ReadSettings.ReadAppSettings().Item1;
-		
-		if (settings == null)
-		{
-			Log.Error("AppSettings is empty ...");
-			Environment.Exit(0);
-		}
-
 		try
 		{
 			ConfigFolderName = FolderNames.ConfigFolder;
@@ -56,6 +52,8 @@ public sealed class FolderPaths
 			InputFolderName = FolderNames.InputFolder;
 
 			OutputFolderName = FolderNames.OutputFolder;
+			
+			DownloadFolderName = FolderNames.DownloadFolder;
 
 			BackUpFolderName = FolderNames.BackUpFolder;
 
@@ -71,6 +69,8 @@ public sealed class FolderPaths
 			HoldFolderPath = Path.Combine(WorkingDirectory, HoldFolderName);
 			
 			InputFolderPath = Path.Combine(HoldFolderPath, InputFolderName);
+			
+			DownloadFolderPath = Path.Combine(HoldFolderPath, DownloadFolderName);
 
 			BackUpFolderPath = Path.Combine(HoldFolderPath, BackUpFolderName);
 
@@ -78,7 +78,7 @@ public sealed class FolderPaths
 		}
 		catch (Exception ex)
 		{
-			Console.WriteLine(ex.Message);
+			Log.Error(ex, "Error initializing the folder paths ....");
 			throw;
 		}
 	}

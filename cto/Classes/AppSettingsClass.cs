@@ -21,12 +21,13 @@ public class ProjectSettings
 	public string ImportProjectId { get; set; } = string.Empty;
 	public string ImportQueue { get; set; } = string.Empty;
 	public string ImportTemplateKey { get; set; } = string.Empty;
+	public string ClientName { get; set; } = string.Empty;
 }
 
 public class FileSettings
 {
 	public string FileDeliveryMethod { get; set; } = string.Empty;
-	public bool RemoveRootFiles { get; set; }
+	public bool RemoveSourceFiles { get; set; }
 	public string MatchColumn { get; set; } = string.Empty;
 	public string MainFieldWorksheet { get; set; } = string.Empty;
 	public string LineItemsFieldWorksheet { get; set; } = string.Empty;
@@ -40,6 +41,7 @@ public class FtpDeliverSettings
 	public string Password { get; set; } = string.Empty;
 	public int Port { get; set; }
 	public string RemoteFolderPath { get; set; } = string.Empty;
+	public bool RemoveRemoteFiles { get; set; }
 }
 
 public class FieldSettings

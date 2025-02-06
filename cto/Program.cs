@@ -1,28 +1,23 @@
 ﻿using cto.ProgramClasses;
-using cto.SupportClasses;
 using cto.Versioning;
 using Serilog;
 
-LoggingConfig.ConfigureLogging();
+VersionUpdater.IncrementVersion();
 
 try
 {
-    VersionUpdater.IncrementVersion();
-    MakeBanner.AppName();
-    Log.Information("Application Started ....");
     if (!CheckFolders.StartCheckFolders())
     {
-        Console.WriteLine("Folder Check Failed .... Press any key to exit ....");
+        Log.Error("Folder Check Failed .... Press any key to exit ....");
         Console.Read();
         Environment.Exit(0);
     }
-
-    ReadInExcelFile.ReadExcelFile();   
+    
+    await StartReadingProcess.StartReading();   
 }
 catch (Exception ex)
 {
     Log.Error(ex, "Application Failed ....");
-    Console.WriteLine("Application Failed .... Press any key to exit ....");
     Console.Read();
     Environment.Exit(0);
 }

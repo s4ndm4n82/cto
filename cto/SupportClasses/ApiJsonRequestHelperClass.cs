@@ -63,7 +63,7 @@ public class ApiJsonRequestHelperClass
 
 	public static List<JsonStringClass.Fields> CreateFieldsList(InvoiceDto invoiceDtoData)
 	{
-		var settings = ReadSettings.ReadAppSettings().Item1;
+		var settings = GlobalAppSettings.Instance.Settings;
 		
 		if (settings == null)
 		{
@@ -104,7 +104,7 @@ public class ApiJsonRequestHelperClass
 
 	public static List<JsonStringClass.Tables> CreateLineFieldsList(InvoiceDto invoiceDtoData)
 	{
-		var settings = ReadSettings.ReadAppSettings().Item1;
+		var settings = GlobalAppSettings.Instance.Settings;
 		
 		if (settings == null)
 		{

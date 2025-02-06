@@ -1,37 +1,45 @@
 ﻿using cto.Classes;
-using cto.SupportClasses;
 using Microsoft.Extensions.Configuration;
+using Serilog;
 
 namespace cto.ProgramClasses;
 
-public class ReadSettings
+public static class ReadSettings
 {
     private static readonly string ConfigFilePath = Path
         .Combine(
             Directory.GetCurrentDirectory(), "ConfigFiles"
         );
     
-    private static readonly string DataFilePath = Path
-        .Combine(
-            Directory.GetCurrentDirectory(), "HoldFolder", "Input"
-        );
-    
-    public static (AppSettingsClass?, string) ReadAppSettings()
+    public static async Task<AppSettingsClass?> ReadAppSettings(string configFileName)
     {
         try
         {
-            var configFile = FileFunctions.GetMatchingConfigFile(ConfigFilePath, DataFilePath);
-            var configBuilder = ReadConfigs(configFile.Item1).Get<AppSettingsClass>();
-
-            return (configBuilder, configFile.Item2);
+            var configBuilder = await ReadConfigs(configFileName);
+            
+            if (configBuilder == null)
+            {
+                Log.Error("Config file is empty ....");
+                return null;
+            }
+            var appSettings = configBuilder.Get<AppSettingsClass>();
+            
+            if (appSettings == null)
+            {
+                Log.Error("AppSettings is empty ....");
+                return null;
+            }
+            
+            GlobalAppSettings.Instance.UpdateSettings(appSettings);
+            return appSettings;
         }
         catch (Exception ex)
         {
-            Console.WriteLine(ex.Message);
-            throw;
+            Log.Error(ex, "Error reading the AppSettings ....");
+            return null;
         }
     }
-    private static IConfigurationRoot ReadConfigs(string configFileName)
+    private static async Task<IConfigurationRoot?> ReadConfigs(string configFileName)
     {
         try
         {
@@ -40,12 +48,13 @@ public class ReadSettings
                 .AddJsonFile(configFileName)
                 .Build();
 
+            await Task.CompletedTask;
             return configBuilder;
         }
         catch (Exception ex)
         {
-            Console.WriteLine(ex.Message);
-            throw;
+            Log.Error(ex, "Error reading the Config file ....");
+            return null;
         }
     }
 }

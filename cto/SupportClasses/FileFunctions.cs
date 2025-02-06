@@ -1,50 +1,37 @@
-﻿namespace cto.SupportClasses;
+﻿using Serilog;
+
+namespace cto.SupportClasses;
 
 public class FileFunctions
 {
-    public static (string,string) GetMatchingConfigFile(string configFilePath, string dataFilePath)
+    public static string GetMatchingDataFile(string configFileName, string dataFilePath)
     {
         try
         {
             var dataFiles = Directory.GetFiles(dataFilePath);
-            var configFiles = Directory.GetFiles(configFilePath);
 
-            if (dataFiles.Length == 0 || configFiles.Length == 0)
+            if (dataFiles.Length == 0)
             {
-                Console.WriteLine("Input or Config folder is empty ...");
-                Console.WriteLine("Press any key to exit ...");
-                Console.Read();
-                Environment.Exit(0);
+                Log.Error("Input or Config folder is empty ...");
+                return string.Empty;
             }
 
             foreach (var dataFile in dataFiles)
             {
                 var dataFileName = Path.GetFileName(dataFile);
                 var clientName = GetClientNameFromFileName(Path.GetFileNameWithoutExtension(dataFile));
-
-                foreach (var configFile in configFiles)
-                {
-                    var configFileName = Path.GetFileName(configFile);
-                    var configClientName = GetFielNameFromConfigFileName(Path.GetFileNameWithoutExtension(configFile));
-
-                    if (clientName.Equals(configClientName, StringComparison.OrdinalIgnoreCase))
-                    {
-                        return (configFileName, dataFileName);
-                    }
-                    else
-                    {
-                        continue;
-                    }
-                }
+                var configClientName = GetFileNameFromConfigFileName(Path.GetFileNameWithoutExtension(configFileName));
+                
+                if (clientName.Equals(configClientName, StringComparison.OrdinalIgnoreCase)) return dataFileName;
             }
         }
         catch (Exception ex)
         {
-            Console.WriteLine(ex.Message);
-            throw;
+            Log.Error(ex, "Error getting the matching config file ....");
+            return string.Empty;
         }
 
-        return (string.Empty, string.Empty);
+        return string.Empty;
     }
     
     private static string GetClientNameFromFileName(string fileName)
@@ -61,7 +48,7 @@ public class FileFunctions
         }
     } 
     
-    private static string GetFielNameFromConfigFileName(string fileName)
+    private static string GetFileNameFromConfigFileName(string fileName)
     {
         try
         {

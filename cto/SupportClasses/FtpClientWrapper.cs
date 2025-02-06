@@ -1,4 +1,5 @@
-﻿using cto.Interfaces;
+﻿using cto.Classes;
+using cto.Interfaces;
 using cto.ProgramClasses;
 using FluentFTP;
 using Serilog;
@@ -12,7 +13,7 @@ public class FtpClientWrapper : IFileTransferClient
     
     public FtpClientWrapper()
     {
-        var settings = ReadSettings.ReadAppSettings().Item1;
+        var settings = GlobalAppSettings.Instance.Settings;
         
         if (settings == null)
         {
@@ -56,10 +57,11 @@ public class FtpClientWrapper : IFileTransferClient
         }
     }
     
-    public async Task DownloadFilesAsync(string localPath, string remotePath)
+    public async Task<bool> DownloadFilesAsync(string localPath, string remotePath)
     {
         try
         {
+            await _ftpClient.Connect();
             Log.Information("Downloading files from the FTP server ....");
             
             // Get the list of files in the remote directory
@@ -68,18 +70,34 @@ public class FtpClientWrapper : IFileTransferClient
             var listToDownload = ftpFileList
                 .Where(x => x.Type == FtpObjectType.File)
                 .Select(f => f.FullName);
+            
             // Download the files
-            await _ftpClient.DownloadFiles(localPath,
-                listToDownload,
+            var remoteFiles = listToDownload as string[] ?? listToDownload.ToArray();
+            
+            var downloadedFiles = await _ftpClient.DownloadFiles(localPath,
+                remoteFiles,
                 FtpLocalExists.Resume,
                 FtpVerify.None,
                 FtpError.None,
                 _cancellationToken);
+            
+            if (remoteFiles.Length == downloadedFiles.ToArray().Length)
+            {
+                Log.Information("Files downloaded successfully ....");
+                return true;
+            };
+            Log.Error("Error downloading files from the FTP server ....");
+            return false;
+
         }
         catch (Exception ex)
         {
             Log.Error(ex, "Error downloading files from the FTP server ....");
-            throw;
+            return false;
+        }
+        finally
+        {
+            await _ftpClient.Disconnect(_cancellationToken);
         }
     }
     
@@ -87,6 +105,7 @@ public class FtpClientWrapper : IFileTransferClient
     {
         try
         {
+            await _ftpClient.Connect(_cancellationToken);
             Log.Information("Deleting files from the FTP server ....");
             var fileList = await _ftpClient.GetListing(remotePath, _cancellationToken);
             
@@ -100,6 +119,10 @@ public class FtpClientWrapper : IFileTransferClient
         {
             Log.Error(ex, "Error deleting files from the FTP server ....");
             throw;
+        }
+        finally
+        {
+            await _ftpClient.Disconnect(_cancellationToken);
         }
     }
 }

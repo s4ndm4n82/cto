@@ -12,7 +12,7 @@ public class CreateApiJsonRequest
 {
     public static bool MakeJsonRequest(InvoiceDto invoiceDtoData)
     {
-        var settings = ReadSettings.ReadAppSettings().Item1;
+        var settings = GlobalAppSettings.Instance.Settings;
         var fileList = ApiJsonRequestHelperClass.CreateFilesList(invoiceDtoData);
         var fieldsList = ApiJsonRequestHelperClass.CreateFieldsList(invoiceDtoData);
         var lineFieldList = ApiJsonRequestHelperClass.CreateLineFieldsList(invoiceDtoData);

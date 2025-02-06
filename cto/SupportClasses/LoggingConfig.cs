@@ -2,13 +2,13 @@
 
 namespace cto.SupportClasses;
 
-public class LoggingConfig
+public static class LoggingConfig
 {
     public static void ConfigureLogging()
     {
-        FolderPaths.Instance.InitializePaths();
+        //FolderPaths.Instance.InitializePaths();
         var logFolderPath = FolderPaths.Instance.LogFolderPath;
-        var fileName = "cto_log"+ "_" + ".txt";
+        const string fileName = "cto_log"+ "_" + ".txt";
         var filePath = Path.Combine(logFolderPath, fileName);
             
         Log.Logger = new LoggerConfiguration()

@@ -1,6 +1,9 @@
-﻿using cto.Interfaces;
+﻿using cto.Classes;
+using cto.Interfaces;
 using cto.ProgramClasses;
 using Renci.SshNet;
+using Renci.SshNet.Async;
+using Renci.SshNet.Sftp;
 using Serilog;
 
 namespace cto.SupportClasses;
@@ -8,10 +11,10 @@ namespace cto.SupportClasses;
 public class SftpClientWrapper : IFileTransferClient
 {
     private readonly SftpClient _sftpClient;
-
+    
     public SftpClientWrapper()
     {
-        var settings = ReadSettings.ReadAppSettings().Item1;
+        var settings = GlobalAppSettings.Instance.Settings;
         
         if (settings == null)
         {
@@ -31,8 +34,7 @@ public class SftpClientWrapper : IFileTransferClient
     {
         try
         {
-            _sftpClient.Connect();
-            await Task.CompletedTask;
+            await _sftpClient.ConnectAsync(CancellationToken.None);
             Log.Information("Connected to the SFTP server ....");
         }
         catch (Exception e)
@@ -57,19 +59,62 @@ public class SftpClientWrapper : IFileTransferClient
         }
     }
     
-    public async Task DownloadFilesAsync(string remotePath, string localPath)
+    public async Task<bool> DownloadFilesAsync(string remotePath, string localPath)
     {
         try
         {
+            _sftpClient.Connect();
             var fileList = _sftpClient.ListDirectory(remotePath);
+            var sftpFiles = fileList as ISftpFile[] ?? fileList.ToArray();
+            var loopCount = 0;
+
+            foreach (var file in sftpFiles)
+            {
+                var downloadPath = Path.Combine(localPath, file.Name);
+                await using var fileStream = new FileStream(downloadPath, FileMode.Create, FileAccess.ReadWrite);
+                await _sftpClient.DownloadAsync(file.FullName, fileStream);
+
+                Log.Information($"Downloaded {file.Name} file from the SFTP server ....");
+                loopCount++;
+            }
             
-            
-            Log.Information("Downloaded file from the SFTP server ....");
+            if (loopCount == sftpFiles.Length) return true;
+
+            Log.Error("Error downloading file from the SFTP server ....");
+            return false;
         }
         catch (Exception e)
         {
             Log.Error(e, "Error downloading file from the SFTP server ....");
+            return false;
+        }
+        finally
+        {
+            _sftpClient.Disconnect();
+        }
+    }
+    
+    public async Task DeleteFilesAsync(string remotePath)
+    {
+        try
+        {
+            _sftpClient.Connect();
+            var fileList = _sftpClient.ListDirectory(remotePath);
+            
+            foreach (var file in fileList)
+            {
+                await _sftpClient.DeleteAsync(file.FullName, CancellationToken.None);
+                Log.Information($"Deleted {file.Name} file from the SFTP server ....");
+            }
+        }
+        catch (Exception e)
+        {
+            Log.Error(e, "Error deleting file from the SFTP server ....");
             throw;
+        }
+        finally
+        {
+            _sftpClient.Disconnect();
         }
     }
 }

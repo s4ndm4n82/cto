@@ -1,4 +1,5 @@
-﻿using cto.SupportClasses;
+﻿using cto.Classes;
+using cto.SupportClasses;
 using OfficeOpenXml;
 using Serilog;
 using LicenseContext = OfficeOpenXml.LicenseContext;
@@ -7,19 +8,19 @@ namespace cto.ProgramClasses;
 
 public class ReadInExcelFile
 {
-	public static void ReadExcelFile()
+	public static void ReadExcelFile(string inputFileName)
 	{
 		try
 		{
 			// Initialize the folder paths
 			FolderPaths.Instance.InitializePaths();
 			// Read the app settings
-			var (settings, inputFileName) = ReadSettings.ReadAppSettings();
+			var settings = GlobalAppSettings.Instance.Settings;
 
 			if (settings == null)
 			{
 				Log.Error("AppSettings is empty ....");
-				Environment.Exit(0);
+				return;
 			}
 			
 			// Loading config data from the app settings
@@ -32,10 +33,8 @@ public class ReadInExcelFile
 
 			if (string.IsNullOrEmpty(inputFilePath))
 			{
-				Console.WriteLine("Input folder is empty ....");
-				Console.WriteLine("Press any key to exit ....");
-				Console.Read();
-				Environment.Exit(0);
+				Log.Error("Input folder is empty ....");
+				return;
 			}
 			
 			// Set the license context
