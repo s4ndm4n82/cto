@@ -51,9 +51,6 @@ public class FileSettings
 	public string MatchColumn { get; set; } = string.Empty;
 	public string MainFieldWorksheet { get; set; } = string.Empty;
 	public string LineItemsFieldWorksheet { get; set; } = string.Empty;
-	public string DummyBase64 { get; set; } = string.Empty;
-	public List<string> InvoiceLevelHeaders { get; set; } = [];
-	public List<string> LineLevelHeaders { get; set; } = [];
 }
 
 public class FieldSettings

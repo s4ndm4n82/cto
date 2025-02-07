@@ -208,3 +208,8 @@ G:\Users\S4NDM4N\Development\Repos\cto\cto\obj\Debug\net9.0\cto.genruntimeconfig
 G:\Users\S4NDM4N\Development\Repos\cto\cto\obj\Debug\net9.0\ref\cto.dll
 G:\Users\S4NDM4N\Development\Repos\cto\cto\bin\Debug\net9.0\BouncyCastle.Cryptography.dll
 G:\Users\S4NDM4N\Development\Repos\cto\cto\bin\Debug\net9.0\itext.bouncy-castle-adapter.dll
+G:\Users\S4NDM4N\Development\Repos\cto\cto\bin\Debug\net9.0\FluentFTP.dll
+G:\Users\S4NDM4N\Development\Repos\cto\cto\bin\Debug\net9.0\Serilog.dll
+G:\Users\S4NDM4N\Development\Repos\cto\cto\bin\Debug\net9.0\Serilog.Sinks.Console.dll
+G:\Users\S4NDM4N\Development\Repos\cto\cto\bin\Debug\net9.0\Serilog.Sinks.File.dll
+G:\Users\S4NDM4N\Development\Repos\cto\cto\bin\Debug\net9.0\Renci.SshNet.dll

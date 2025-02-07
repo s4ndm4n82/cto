@@ -20,6 +20,11 @@ public class ReadSettings
     {
         try
         {
+            if (!Directory.Exists(DataFilePath))
+            {
+                Directory.CreateDirectory(DataFilePath);
+            }
+            
             var configFile = FileFunctions.GetMatchingConfigFile(ConfigFilePath, DataFilePath);
             var configBuilder = ReadConfigs(configFile.Item1).Get<AppSettingsClass>();
 
