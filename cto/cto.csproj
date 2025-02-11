@@ -29,82 +29,71 @@
     </ItemGroup>
 
     <ItemGroup>
-      <None Update="ConfigFiles\appsettings_arvato_creditnote.Debug.json">
+      <None Update="ConfigFiles\appsettings_default.Debug.json">
         <IsTransformFile>true</IsTransformFile>
-        <DependentUpon>appsettings_arvato_creditnote.json</DependentUpon>
+        <DependentUpon>appsettings_default.json</DependentUpon>
       </None>
-      <None Update="ConfigFiles\appsettings_arvato_creditnote.Release.json">
-        <IsTransformFile>true</IsTransformFile>
-        <DependentUpon>appsettings_arvato_creditnote.json</DependentUpon>
-      </None>
-      <None Update="ConfigFiles\appsettings_arvato_creditnote.json">
+      <None Update="ConfigFiles\appsettings_default.json">
         <TransformOnBuild>true</TransformOnBuild>
       </None>
-      <None Update="ConfigFiles\appsettings_default_default.Debug.json">
+      <None Update="ConfigFiles\appsettings_default.Release.json">
         <IsTransformFile>true</IsTransformFile>
-        <DependentUpon>appsettings_default_default.json</DependentUpon>
+        <DependentUpon>appsettings_default.json</DependentUpon>
       </None>
-      <None Update="ConfigFiles\appsettings_default_default.json">
+      <None Update="ConfigFiles\appsettings_arvato.Debug.json">
+        <IsTransformFile>true</IsTransformFile>
+        <DependentUpon>appsettings_arvato.json</DependentUpon>
+      </None>
+      <None Update="ConfigFiles\appsettings_arvato.json">
         <TransformOnBuild>true</TransformOnBuild>
       </None>
-      <None Update="ConfigFiles\appsettings_default_default.Release.json">
+      <None Update="ConfigFiles\appsettings_arvato.Release.json">
         <IsTransformFile>true</IsTransformFile>
-        <DependentUpon>appsettings_default_default.json</DependentUpon>
+        <DependentUpon>appsettings_arvato.json</DependentUpon>
       </None>
-      <None Update="ConfigFiles\appsettings_arvato_Invoice.Debug.json">
+      <None Update="ConfigFiles\appsettings_dossb.Debug.json">
         <IsTransformFile>true</IsTransformFile>
-        <DependentUpon>appsettings_arvato_invoice.json</DependentUpon>
+        <DependentUpon>appsettings_dossb.json</DependentUpon>
       </None>
-      <None Update="ConfigFiles\appsettings_arvato_invoice.json">
+      <None Update="ConfigFiles\appsettings_dossb.json">
         <TransformOnBuild>true</TransformOnBuild>
       </None>
-      <None Update="ConfigFiles\appsettings_arvato_Invoice.Release.json">
+      <None Update="ConfigFiles\appsettings_dossb.Release.json">
         <IsTransformFile>true</IsTransformFile>
-        <DependentUpon>appsettings_arvato_invoice.json</DependentUpon>
+        <DependentUpon>appsettings_dossb.json</DependentUpon>
       </None>
-      <None Update="ConfigFiles\appsettings_dossb_Invoice.Debug.json">
+      <None Update="ConfigFiles\appsettings_pmsb.Debug.json">
         <IsTransformFile>true</IsTransformFile>
-        <DependentUpon>appsettings_dossb_invoice.json</DependentUpon>
+        <DependentUpon>appsettings_pmsb.json</DependentUpon>
       </None>
-      <None Update="ConfigFiles\appsettings_dossb_invoice.json">
+      <None Update="ConfigFiles\appsettings_pmsb.json">
         <TransformOnBuild>true</TransformOnBuild>
       </None>
-      <None Update="ConfigFiles\appsettings_dossb_Invoice.Release.json">
+      <None Update="ConfigFiles\appsettings_pmsb.Release.json">
         <IsTransformFile>true</IsTransformFile>
-        <DependentUpon>appsettings_dossb_invoice.json</DependentUpon>
+        <DependentUpon>appsettings_pmsb.json</DependentUpon>
       </None>
-      <None Update="ConfigFiles\appsettings_pmsb_Invoice.Debug.json">
+      <None Update="ConfigFiles\appsettings_prsb.Debug.json">
         <IsTransformFile>true</IsTransformFile>
-        <DependentUpon>appsettings_pmsb_Invoice.json</DependentUpon>
+        <DependentUpon>appsettings_prsb.json</DependentUpon>
       </None>
-      <None Update="ConfigFiles\appsettings_pmsb_Invoice.json">
+      <None Update="ConfigFiles\appsettings_prsb.json">
         <TransformOnBuild>true</TransformOnBuild>
       </None>
-      <None Update="ConfigFiles\appsettings_pmsb_Invoice.Release.json">
+      <None Update="ConfigFiles\appsettings_prsb.Release.json">
         <IsTransformFile>true</IsTransformFile>
-        <DependentUpon>appsettings_pmsb_Invoice.json</DependentUpon>
+        <DependentUpon>appsettings_prsb.json</DependentUpon>
       </None>
-      <None Update="ConfigFiles\appsettings_prsb_Invoice.Debug.json">
+      <None Update="ConfigFiles\appsettings_rsaj.Debug.json">
         <IsTransformFile>true</IsTransformFile>
-        <DependentUpon>appsettings_prsb_invoice.json</DependentUpon>
+        <DependentUpon>appsettings_rsaj.json</DependentUpon>
       </None>
-      <None Update="ConfigFiles\appsettings_prsb_invoice.json">
+      <None Update="ConfigFiles\appsettings_rsaj.json">
         <TransformOnBuild>true</TransformOnBuild>
       </None>
-      <None Update="ConfigFiles\appsettings_prsb_Invoice.Release.json">
+      <None Update="ConfigFiles\appsettings_rsaj.Release.json">
         <IsTransformFile>true</IsTransformFile>
-        <DependentUpon>appsettings_prsb_invoice.json</DependentUpon>
-      </None>
-      <None Update="ConfigFiles\appsettings_rsaj_Invoice.Debug.json">
-        <IsTransformFile>true</IsTransformFile>
-        <DependentUpon>appsettings_rsaj_invoice.json</DependentUpon>
-      </None>
-      <None Update="ConfigFiles\appsettings_rsaj_invoice.json">
-        <TransformOnBuild>true</TransformOnBuild>
-      </None>
-      <None Update="ConfigFiles\appsettings_rsaj_Invoice.Release.json">
-        <IsTransformFile>true</IsTransformFile>
-        <DependentUpon>appsettings_rsaj_invoice.json</DependentUpon>
+        <DependentUpon>appsettings_rsaj.json</DependentUpon>
       </None>
     </ItemGroup>
 
