@@ -25,15 +25,11 @@ public class FileFunctions
                 foreach (var configFile in configFiles)
                 {
                     var configFileName = Path.GetFileName(configFile);
-                    var configClientName = GetFielNameFromConfigFileName(Path.GetFileNameWithoutExtension(configFile));
+                    var configClientName = GetFileNameFromConfigFileName(Path.GetFileNameWithoutExtension(configFile));
 
                     if (clientName.Equals(configClientName, StringComparison.OrdinalIgnoreCase))
                     {
                         return (configFileName, dataFileName);
-                    }
-                    else
-                    {
-                        continue;
                     }
                 }
             }
@@ -61,7 +57,7 @@ public class FileFunctions
         }
     } 
     
-    private static string GetFielNameFromConfigFileName(string fileName)
+    private static string GetFileNameFromConfigFileName(string fileName)
     {
         try
         {

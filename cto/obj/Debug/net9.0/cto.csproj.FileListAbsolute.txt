@@ -147,12 +147,6 @@ F:\Users\S4NDM4N\Development\cto\cto\obj\Debug\net9.0\cto.genruntimeconfig.cache
 F:\Users\S4NDM4N\Development\cto\cto\obj\Debug\net9.0\ref\cto.dll
 F:\Users\S4NDM4N\Development\cto\cto\bin\Debug\net9.0\ConfigFiles\appsettings_default.json
 G:\Users\S4NDM4N\Development\Repos\cto\cto\bin\Debug\net9.0\cto.exe
-G:\Users\S4NDM4N\Development\Repos\cto\cto\bin\Debug\net9.0\ConfigFiles\appsettings_arvato.json
-G:\Users\S4NDM4N\Development\Repos\cto\cto\bin\Debug\net9.0\ConfigFiles\appsettings_default.json
-G:\Users\S4NDM4N\Development\Repos\cto\cto\bin\Debug\net9.0\ConfigFiles\appsettings_dossb.json
-G:\Users\S4NDM4N\Development\Repos\cto\cto\bin\Debug\net9.0\ConfigFiles\appsettings_pmsb.json
-G:\Users\S4NDM4N\Development\Repos\cto\cto\bin\Debug\net9.0\ConfigFiles\appsettings_prsb.json
-G:\Users\S4NDM4N\Development\Repos\cto\cto\bin\Debug\net9.0\ConfigFiles\appsettings_rsaj.json
 G:\Users\S4NDM4N\Development\Repos\cto\cto\bin\Debug\net9.0\cto.deps.json
 G:\Users\S4NDM4N\Development\Repos\cto\cto\bin\Debug\net9.0\cto.runtimeconfig.json
 G:\Users\S4NDM4N\Development\Repos\cto\cto\bin\Debug\net9.0\cto.dll
@@ -213,3 +207,10 @@ G:\Users\S4NDM4N\Development\Repos\cto\cto\bin\Debug\net9.0\Serilog.dll
 G:\Users\S4NDM4N\Development\Repos\cto\cto\bin\Debug\net9.0\Serilog.Sinks.Console.dll
 G:\Users\S4NDM4N\Development\Repos\cto\cto\bin\Debug\net9.0\Serilog.Sinks.File.dll
 G:\Users\S4NDM4N\Development\Repos\cto\cto\bin\Debug\net9.0\Renci.SshNet.dll
+G:\Users\S4NDM4N\Development\Repos\cto\cto\bin\Debug\net9.0\ConfigFiles\appsettings_arvato_creditnote.json
+G:\Users\S4NDM4N\Development\Repos\cto\cto\bin\Debug\net9.0\ConfigFiles\appsettings_arvato_invoice.json
+G:\Users\S4NDM4N\Development\Repos\cto\cto\bin\Debug\net9.0\ConfigFiles\appsettings_default_default.json
+G:\Users\S4NDM4N\Development\Repos\cto\cto\bin\Debug\net9.0\ConfigFiles\appsettings_dossb_invoice.json
+G:\Users\S4NDM4N\Development\Repos\cto\cto\bin\Debug\net9.0\ConfigFiles\appsettings_pmsb_Invoice.json
+G:\Users\S4NDM4N\Development\Repos\cto\cto\bin\Debug\net9.0\ConfigFiles\appsettings_prsb_invoice.json
+G:\Users\S4NDM4N\Development\Repos\cto\cto\bin\Debug\net9.0\ConfigFiles\appsettings_rsaj_invoice.json
