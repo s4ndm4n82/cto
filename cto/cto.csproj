@@ -62,6 +62,17 @@
         <IsTransformFile>true</IsTransformFile>
         <DependentUpon>appsettings_dossb.json</DependentUpon>
       </None>
+      <None Update="ConfigFiles\appsettings_pdsb.Debug.json">
+        <IsTransformFile>true</IsTransformFile>
+        <DependentUpon>appsettings_pdsb.json</DependentUpon>
+      </None>
+      <None Update="ConfigFiles\appsettings_pdsb.Release.json">
+        <IsTransformFile>true</IsTransformFile>
+        <DependentUpon>appsettings_pdsb.json</DependentUpon>
+      </None>
+      <None Update="ConfigFiles\appsettings_pdsb.json">
+        <TransformOnBuild>true</TransformOnBuild>
+      </None>
       <None Update="ConfigFiles\appsettings_pmsb.Debug.json">
         <IsTransformFile>true</IsTransformFile>
         <DependentUpon>appsettings_pmsb.json</DependentUpon>
